@@ -1,0 +1,90 @@
+{
+  "name": "teslim-tutanak-form-app",
+  "version": "1.0.0",
+  "description": "Rolex, Tudor ve Cufflinks ürünleri için gelişmiş teslim tutanağı oluşturma uygulaması",
+  "private": true,
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.511.0",
+    "papaparse": "^5.5.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "start": "ESLINT_NO_DEV_ERRORS=true react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test:watch": "react-scripts test --watch",
+    "test:coverage": "react-scripts test --coverage --silent --watchAll=false",
+    "test:ci": "CI=true react-scripts test --coverage --silent --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint": "npx eslint src/**/*.js",
+    "lint:fix": "npx eslint src/**/*.js --fix",
+    "format": "npx prettier --write src/**/*.{js,jsx,css,md}",
+    "analyze": "npm run build && npx source-map-explorer 'build/static/js/*.js'",
+    "analyze:css": "npm run build && npx source-map-explorer 'build/static/css/*.css'",
+    "bundle-stats": "npm run build && npx source-map-explorer 'build/static/js/*.js' --html > bundle-report.html",
+    "audit:check": "npm audit --audit-level=moderate",
+    "audit:fix": "npm audit fix",
+    "security:update": "npm update && npm audit fix",
+    "clean:install": "rm -rf node_modules package-lock.json && npm install",
+    "backup:restore": "cp backups/package.json.backup package.json && npm run clean:install",
+    "setup:dev": "npm install --save-dev eslint @eslint/js eslint-plugin-react eslint-plugin-react-hooks prettier",
+    "test:all": "npm run test:ci && npm run lint && npm run build",
+    "optimize:images": "node scripts/optimize-images.js",
+    "prebuild": "npm run optimize:images"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.15",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.28.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "imagemin": "^9.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-webp": "^8.0.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "postcss": "^8.4.32",
+    "prettier": "^3.5.3",
+    "source-map-explorer": "^2.5.3",
+    "tailwindcss": "^3.4.17"
+  },
+  "keywords": [
+    "react",
+    "rolex",
+    "tudor",
+    "cufflinks",
+    "form",
+    "teslim",
+    "tutanak",
+    "saat",
+    "watch"
+  ],
+  "author": "Serdar Benli",
+  "license": "MIT",
+  "homepage": "./",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}

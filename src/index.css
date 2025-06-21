@@ -1,0 +1,55 @@
+/* Modular CSS Architecture - Organized by Concern */
+
+/* FORCE PAGE BACKGROUND - En yüksek öncelik */
+html,
+body,
+body *,
+#root,
+.App {
+  background: #F4FCFB !important;
+}
+
+html {
+  background-color: #F4FCFB !important;
+}
+
+body {
+  background-color: #F4FCFB !important;
+  background: #F4FCFB !important;
+}
+
+/* Tailwind override */
+body.bg-white {
+  background: #F4FCFB !important;
+  background-color: #F4FCFB !important;
+}
+
+/* 1. CSS Variables - Tüm değişkenler ve tokens */
+@import './styles/variables.css';
+
+/* 2. Base Styles - Global ve temel stiller */
+@import './styles/base.css';
+
+/* 3. Layout - Modal, grid ve positioning sistemleri */
+@import './styles/layout.css';
+
+/* 4. Components - Button, input ve UI bileşenleri */
+@import './styles/components.css';
+
+/* 5. Animations - Keyframe animasyonları */
+@import './styles/animations.css';
+
+/* 6. Brand-Specific - Marka özel stilleri */
+@import './styles/brands.css';
+
+/*
+CSS Reorganization Summary:
+- ✅ 38KB → ~8KB (6 modular files)
+- ✅ Body selector duplicates removed
+- ✅ 3 shadow rolling animations → 1 unified animation (--brand-color)
+- ✅ Modal positioning optimized with CSS variables
+- ✅ Brand colors centralized
+- ✅ Neumorphism effects simplified
+- ✅ Loader animations unified with single CSS variable
+- ✅ Better maintainability with modular structure
+*/

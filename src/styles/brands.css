@@ -1,0 +1,468 @@
+/* Logo arkaplan kaldırma - Hover efekti olmadan */
+/* Rolex ve Tudor logolarının beyaz arkaplanını kaldır ama orjinal kalitede bırak */
+img[src*="rolex.png"],
+img[src*="tudor.png"] {
+  background: transparent !important;
+  /* mix-blend-mode kaldırıldı - logolar silik görünyordu */
+  /* filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) !important; */
+}
+
+/* Marka logosu class'ları için özel kurallar */
+img[src*="rolex.png"].brand-logo,
+img[src*="tudor.png"].brand-logo,
+img[src*="rolex.png"].brand-logo-placeholder,
+img[src*="tudor.png"].brand-logo-placeholder {
+  background: transparent !important;
+  /* mix-blend-mode kaldırıldı */
+  /* filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15)) !important; */
+  
+  /* Hover efektlerini kaldır */
+  opacity: 0.8 !important;
+  filter: grayscale(0%) !important;
+  transform: none !important;
+}
+
+/* Hover efektlerini tamamen kaldır */
+img[src*="rolex.png"].brand-logo:hover,
+img[src*="tudor.png"].brand-logo:hover,
+img[src*="rolex.png"].brand-logo-placeholder:hover,
+img[src*="tudor.png"].brand-logo-placeholder:hover {
+  opacity: 0.8 !important;
+  filter: grayscale(0%) !important;
+  transform: none !important;
+}
+
+/* Parlama animasyonunu kaldır */
+img[src*="rolex.png"].brand-logo::before,
+img[src*="tudor.png"].brand-logo::before,
+img[src*="rolex.png"].brand-logo-placeholder::before,
+img[src*="tudor.png"].brand-logo-placeholder::before {
+  display: none !important;
+}
+
+/* Auto-shine class'ını kaldır */
+img[src*="rolex.png"].auto-shine::before,
+img[src*="tudor.png"].auto-shine::before {
+  display: none !important;
+}
+
+/* Alt attribute ile de kontrol */
+img[alt*="Rolex"],
+img[alt*="Tudor"],
+img[alt="Rolex Logo"],
+img[alt="Tudor Logo"] {
+  background: transparent !important;
+  /* mix-blend-mode kaldırıldı */
+}
+
+/* Marka-spesifik input focus shadow'ları */
+/* Rolex Saat - Yeşil */
+body.brand-rolex.category-saat input.input-filled:focus,
+body.brand-rolex.category-saat select.input-filled:focus {
+  box-shadow: 0 0 0 2px rgba(20, 92, 58, 0.2) !important;
+}
+
+body.brand-rolex.category-saat .payment-modal input.input-filled:focus,
+body.brand-rolex.category-saat .payment-modal select.input-filled:focus {
+  box-shadow: 0 0 0 2px rgba(20, 92, 58, 0.2) !important;
+}
+
+/* Rolex Aksesuar - Mavi */
+body.brand-rolex.category-aksesuar input.input-filled:focus,
+body.brand-rolex.category-aksesuar select.input-filled:focus {
+  box-shadow: 0 0 0 2px rgba(0, 48, 87, 0.2) !important;
+}
+
+body.brand-rolex.category-aksesuar .payment-modal input.input-filled:focus,
+body.brand-rolex.category-aksesuar .payment-modal select.input-filled:focus {
+  box-shadow: 0 0 0 2px rgba(0, 48, 87, 0.2) !important;
+}
+
+/* Tudor - Kırmızı */
+body.brand-tudor input.input-filled:focus,
+body.brand-tudor select.input-filled:focus {
+  box-shadow: 0 0 0 2px rgba(190, 3, 0, 0.2) !important;
+}
+
+body.brand-tudor .payment-modal input.input-filled:focus,
+body.brand-tudor .payment-modal select.input-filled:focus {
+  box-shadow: 0 0 0 2px rgba(190, 3, 0, 0.2) !important;
+}
+
+/* Brand Border Colors */
+.border-rolex {
+  border-color: var(--rolex-color) !important;
+}
+
+.border-tudor {
+  border-color: var(--tudor-color) !important;
+}
+
+.border-cufflinks {
+  border-color: var(--cufflinks-color) !important;
+}
+
+/* Focus Shadow Colors */
+.focus-shadow-rolex:focus {
+  box-shadow: 0 4px 8px rgba(20, 92, 58, 0.2) !important;
+}
+
+.focus-shadow-tudor:focus {
+  box-shadow: 0 4px 8px rgba(190, 3, 0, 0.2) !important;
+}
+
+.focus-shadow-cufflinks:focus {
+  box-shadow: 0 4px 8px rgba(0, 48, 87, 0.2) !important;
+}
+
+/* Brand Text Colors */
+.text-rolex {
+  color: var(--rolex-color) !important;
+}
+
+.text-tudor {
+  color: var(--tudor-color) !important;
+}
+
+.text-cufflinks {
+  color: var(--cufflinks-color) !important;
+}
+
+/* Brand Button States - Rolex */
+.payment--options button.active[name='rolex'],
+.payment--options button[name='rolex']:hover {
+  color: var(--white);
+  border: 1px solid var(--rolex-color);
+}
+
+.payment--options button.active[name='rolex'] {
+  background: var(--rolex-color);
+  box-shadow:
+    inset 3px 3px 8px rgba(20, 92, 58, 0.3),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.1);
+}
+
+.payment--options button.active[name='rolex']:before,
+.payment--options button[name='rolex']:hover:before {
+  top: -35%;
+  background-color: var(--rolex-color);
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.payment--options button.active[name='rolex']:after,
+.payment--options button[name='rolex']:hover:after {
+  top: -45%;
+  background-color: var(--rolex-color);
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+/* Brand Button States - Tudor */
+.payment--options button.active[name='tudor'],
+.payment--options button[name='tudor']:hover {
+  color: var(--white);
+  border: 1px solid var(--tudor-color);
+}
+
+.payment--options button.active[name='tudor'] {
+  background: var(--tudor-color);
+  box-shadow:
+    inset 3px 3px 8px rgba(190, 3, 0, 0.3),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.1);
+}
+
+.payment--options button.active[name='tudor']:before,
+.payment--options button[name='tudor']:hover:before {
+  top: -35%;
+  background-color: var(--tudor-color);
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.payment--options button.active[name='tudor']:after,
+.payment--options button[name='tudor']:hover:after {
+  top: -45%;
+  background-color: var(--tudor-color);
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+/* Brand Button States - Cufflinks */
+.payment--options button.active[name='cufflinks'],
+.payment--options button[name='cufflinks']:hover {
+  color: var(--white);
+  border: 1px solid var(--cufflinks-color);
+}
+
+.payment--options button.active[name='cufflinks'] {
+  background: var(--cufflinks-color);
+  box-shadow:
+    inset 3px 3px 8px rgba(0, 48, 87, 0.3),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.1);
+}
+
+.payment--options button.active[name='cufflinks']:before,
+.payment--options button[name='cufflinks']:hover:before {
+  top: -35%;
+  background-color: var(--cufflinks-color);
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.payment--options button.active[name='cufflinks']:after,
+.payment--options button[name='cufflinks']:hover:after {
+  top: -45%;
+  background-color: var(--cufflinks-color);
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+/* Brand Loader Colors - Unified CSS Variable Approach */
+.loader.rolex {
+  --brand-color: var(--rolex-color);
+}
+.loader.tudor {
+  --brand-color: var(--tudor-color);
+}
+.loader.cufflinks {
+  --brand-color: var(--cufflinks-color);
+}
+
+/* Logo Container Styles */
+.kulahcioglu-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 10px;
+  background: transparent;
+}
+
+.kulahcioglu-logo {
+  height: 40px;
+  width: auto;
+  opacity: 0.8;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: all var(--transition-normal) ease;
+}
+
+.kulahcioglu-logo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Brand Logo Container */
+.brand-logo-container {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: transparent;
+  text-align: center;
+  min-height: 100px;
+}
+
+.brand-logo {
+  height: 80px;
+  width: auto;
+  opacity: 0.8;
+  /* hover efektleri kaldırıldı */
+  filter: grayscale(0%);
+  transition: none !important;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brand logo parlama animasyonu - KALDIRILDI */
+.brand-logo::before {
+  display: none !important;
+}
+
+.brand-logo:hover {
+  opacity: 0.8;
+  filter: grayscale(0%);
+  transform: none !important;
+}
+
+.brand-logo:hover::before {
+  display: none !important;
+}
+
+.brand-logo.auto-shine::before {
+  display: none !important;
+}
+
+/* Rolex Logo - Özel Boyut */
+.rolex-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: all 0.8s ease-in-out;
+}
+
+.rolex-logo-main {
+  height: 120px;
+  width: auto;
+  opacity: 0.8;
+  transition: all 0.8s ease-in-out;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.rolex-logo-main:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Brand Logo Slide Down Animation */
+.brand-logo-slide-down {
+  animation: slideDownFromTop 0.8s ease-out;
+}
+
+/* Product Image Container */
+.product-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  min-height: 480px;
+  max-height: 540px;
+  background: transparent;
+  border-radius: 12px;
+  overflow: visible;
+  padding: 10px;
+}
+
+/* Product Images */
+.product-image {
+  max-width: 100%;
+  max-height: 380px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  background: transparent;
+  animation: fadeInScale 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.6s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.product-image:hover::before {
+  left: 100%;
+}
+
+.product-image.auto-shine::before {
+  animation: shine 3s ease-in-out infinite;
+}
+
+/* Brand-specific Product Image Sizes */
+.rolex-watch-image {
+  max-height: 480px;
+  height: 480px;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.tudor-watch-image {
+  max-height: 280px;
+  height: 280px;
+  width: auto;
+  object-fit: contain;
+}
+
+.cufflinks-image {
+  max-height: 200px;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+.default-product-image {
+  max-height: 280px;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Brand Placeholder Styles */
+.brand-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: all var(--transition-normal) ease;
+  text-align: center;
+}
+
+.brand-logo-placeholder {
+  height: 80px;
+  width: auto;
+  opacity: 0.7;
+  transition: all var(--transition-normal) ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-logo-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  transition: left 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.brand-logo-placeholder:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.brand-logo-placeholder:hover::before {
+  left: 100%;
+}
+
+.brand-logo-placeholder.auto-shine::before {
+  animation: placeholderShine 5s ease-in-out infinite;
+}
+
+.brand-placeholder-fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: all var(--transition-normal) ease;
+  text-align: center;
+}

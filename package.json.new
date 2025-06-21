@@ -1,0 +1,77 @@
+{
+  "name": "teslim-tutanak-form-app",
+  "version": "1.0.0",
+  "description": "Rolex, Tudor ve Cufflinks ürünleri için gelişmiş teslim tutanağı oluşturma uygulaması",
+  "private": true,
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.511.0",
+    "papaparse": "^5.5.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "format": "prettier --write src/**/*.{js,jsx,css,md}",
+    "analyze": "npm run build && npx source-map-explorer 'build/static/js/*.js'",
+    "analyze:css": "npm run build && npx source-map-explorer 'build/static/css/*.css'",
+    "bundle-stats": "npm run build && npx source-map-explorer 'build/static/js/*.js' --html > bundle-report.html",
+    "audit:check": "npm audit --audit-level=moderate",
+    "audit:fix": "npm audit fix",
+    "security:update": "npm update && npm audit fix"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.15",
+    "autoprefixer": "^10.4.20",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "postcss": "^8.5.3",
+    "prettier": "^3.3.3",
+    "source-map-explorer": "^2.5.3",
+    "tailwindcss": "^3.4.17",
+    "webpack-bundle-analyzer": "^4.10.2"
+  },
+  "keywords": [
+    "react",
+    "rolex",
+    "tudor",
+    "cufflinks",
+    "form",
+    "teslim",
+    "tutanak",
+    "saat",
+    "watch"
+  ],
+  "author": "Serdar Benli",
+  "license": "MIT",
+  "homepage": "./",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}

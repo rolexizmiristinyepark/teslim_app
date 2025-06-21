@@ -1,0 +1,357 @@
+/* Layout - Modal ve Grid Sistemleri */
+
+/* Modal container için 3 bölüm sistemi - Sayfaya ortalı */
+.modal-container {
+  min-height: 100vh;
+  min-width: 1800px;
+  width: 100vw;
+  background: var(--white);
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Modal Form CSS - Modern Tasarım */
+.modal {
+  width: var(--modal-width);
+  min-height: var(--modal-min-height);
+  background: var(--white);
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all var(--transition-slow) ease-in-out;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Ana modal pozisyonları - Sayfaya ortalı */
+.modal.main-modal {
+  left: 50%;
+  transform: translateX(-755px) translateY(-50%);
+}
+
+.modal.main-modal.slide-to-left {
+  left: 50%;
+  transform: translateX(-755px) translateY(-50%);
+}
+
+.modal.main-modal.slide-to-far-left {
+  left: 50%;
+  transform: translateX(-755px) translateY(-50%);
+}
+
+/* İkinci modal pozisyonları - Ortada */
+.modal.second-modal {
+  left: 50%;
+  transform: translateX(-225px) translateY(-50%);
+}
+
+.modal.second-modal.slide-to-left {
+  left: 50%;
+  transform: translateX(-225px) translateY(-50%);
+}
+
+/* Üçüncü modal pozisyonları - Sağda */
+.modal.third-modal {
+  left: 50%;
+  transform: translateX(305px) translateY(-50%);
+  overflow: visible;
+}
+
+/* Form Layout */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: transparent;
+}
+
+/* Payment Grid Sistemi */
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  height: calc(100% - 120px);
+  padding: 24px;
+}
+
+.payment-grid-item {
+  border: 2px dashed #4070f4;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9ff;
+  transition: all var(--transition-normal) ease;
+  position: relative;
+}
+
+.payment-grid-item.filled {
+  border: 2px solid #4070f4;
+  background: var(--white);
+}
+
+.payment-grid-item.add-new {
+  border: 2px dashed #10b981;
+  background: #f0fdf4;
+  cursor: pointer;
+}
+
+.payment-grid-item.add-new:hover {
+  border-color: #059669;
+  background: #ecfdf5;
+  transform: translateY(-2px);
+}
+
+/* Split Layout */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.split input {
+  width: 100%;
+}
+
+/* Separator */
+.separator {
+  width: calc(100% - 20px);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 10px;
+  color: #243C4C;
+  margin: 0 10px;
+}
+
+.separator > p {
+  word-break: keep-all;
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  font-size: 11px;
+  margin: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.separator .line {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  border: 0;
+  background-color: #e8e8e8;
+  margin: auto;
+}
+
+/* Responsive Design - Tablet ve Mobil */
+@media (max-width: 1840px) {
+  .modal-container {
+    min-width: 1700px;
+  }
+
+  .modal {
+    width: var(--modal-width-sm);
+    min-height: var(--modal-min-height);
+  }
+
+  .modal.main-modal {
+    left: 50%;
+    transform: translateX(-700px) translateY(-50%);
+  }
+
+  .modal.second-modal {
+    left: 50%;
+    transform: translateX(-210px) translateY(-50%);
+  }
+
+  .modal.third-modal {
+    left: 50%;
+    transform: translateX(280px) translateY(-50%);
+  }
+}
+
+@media (max-width: 1700px) {
+  .modal-container {
+    min-width: 1600px;
+  }
+
+  .modal {
+    width: var(--modal-width-xs);
+    min-height: var(--modal-min-height);
+  }
+
+  .modal.main-modal {
+    left: 50%;
+    transform: translateX(-650px) translateY(-50%);
+  }
+
+  .modal.second-modal {
+    left: 50%;
+    transform: translateX(-200px) translateY(-50%);
+  }
+
+  .modal.third-modal {
+    left: 50%;
+    transform: translateX(250px) translateY(-50%);
+  }
+}
+
+@media (max-width: 1600px) {
+  .modal-container {
+    min-width: 1500px;
+  }
+
+  .modal {
+    width: var(--modal-width-xxs);
+    min-height: var(--modal-min-height);
+  }
+
+  .modal.main-modal {
+    left: 50%;
+    transform: translateX(-600px) translateY(-50%);
+  }
+
+  .modal.second-modal {
+    left: 50%;
+    transform: translateX(-190px) translateY(-50%);
+  }
+
+  .modal.third-modal {
+    left: 50%;
+    transform: translateX(220px) translateY(-50%);
+  }
+}
+
+@media (max-width: 1400px) {
+  .modal-container {
+    min-width: 1350px;
+  }
+
+  .modal {
+    width: var(--modal-width-mobile);
+    min-height: var(--modal-min-height);
+  }
+
+  .modal.main-modal {
+    left: 50%;
+    transform: translateX(-550px) translateY(-50%);
+  }
+
+  .modal.second-modal {
+    left: 50%;
+    transform: translateX(-175px) translateY(-50%);
+  }
+
+  .modal.third-modal {
+    left: 50%;
+    transform: translateX(200px) translateY(-50%);
+  }
+}
+
+@media (max-width: 1200px) {
+  .modal-container {
+    min-width: 1250px;
+    padding: 10px;
+  }
+
+  .modal {
+    width: 330px;
+    min-height: var(--modal-min-height);
+  }
+
+  .modal.main-modal {
+    left: 50%;
+    transform: translateX(-500px) translateY(-50%);
+  }
+
+  .modal.second-modal {
+    left: 50%;
+    transform: translateX(-165px) translateY(-50%);
+  }
+
+  .modal.third-modal {
+    left: 50%;
+    transform: translateX(170px) translateY(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    min-width: 1150px;
+    overflow-x: auto;
+    padding: 10px;
+  }
+
+  .modal {
+    width: 310px;
+    min-height: 600px;
+  }
+
+  .modal.main-modal {
+    left: 50%;
+    transform: translateX(-465px) translateY(-50%);
+  }
+
+  .modal.second-modal {
+    left: 50%;
+    transform: translateX(-155px) translateY(-50%);
+  }
+
+  .modal.third-modal {
+    left: 50%;
+    transform: translateX(155px) translateY(-50%);
+  }
+}
+
+/* Utility Classes */
+.loader-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.print-fix {
+  page-break-inside: avoid;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+.word-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.highlight {
+  background-color: rgba(249, 250, 251, 0.8);
+  border-radius: var(--border-radius-xs);
+  padding: 0.5rem;
+  border-left: 4px solid #3b82f6;
+}
+
+.pre-wrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+}

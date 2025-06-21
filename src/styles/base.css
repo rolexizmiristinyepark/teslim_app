@@ -1,0 +1,209 @@
+/* Base Styles - Global ve Temel Stiller */
+
+/* Tailwind CSS base directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Base Styles - Tek body tanımı */
+body,
+html body,
+#root {
+  margin: 0;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--page-background) !important;
+  background-color: #F4FCFB !important;
+  min-height: 100vh;
+  color: #243C4C !important;
+}
+
+/* Global text color override - TÜM YAZI RENKLERİ #243C4C */
+*, *::before, *::after {
+  color: #243C4C !important;
+}
+
+/* Sadece input'larda da #F4FCFB yazı + ince #ACBCBF çerçeve olacak - YENİ TASARIM */
+input, select, textarea {
+  background-color: #F4FCFB !important;
+  color: #243C4C !important;
+  border: 1px solid #ACBCBF !important;
+}
+
+/* Placeholder'lar da #F4FCFB olacak */
+input::placeholder, textarea::placeholder {
+  color: #F4FCFB !important;
+}
+
+/* Button'lardaki yazılar da #243C4C olacak (submit butonları hariç) */
+button {
+  color: #243C4C !important;
+}
+
+/* Submit butonları ve success/error butonlarında beyaz yazı kalacak */
+.submit-btn, .clear-btn, .purchase--btn,
+.bg-green-600, .bg-red-600, .bg-blue-600,
+.text-white {
+  color: white !important;
+}
+
+/* Çok güçlü override */
+* {
+  --tw-bg-opacity: 1;
+}
+
+body * {
+  background-color: inherit;
+}
+
+body {
+  background: #F4FCFB !important;
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+/* Global Transitions */
+* {
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Modern button hover states */
+button {
+  transition: all var(--transition-fast) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Payment options butonlarında hareket efektini kaldır */
+.payment--options button:hover {
+  transform: none;
+}
+
+.payment--options button:active {
+  transform: none;
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Typography */
+p,
+span,
+div {
+  line-height: 1.5;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Accessibility Enhancements */
+.focus-visible\:ring-2:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .border {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles - Simplified */
+@media print {
+  /* Sayfa ayarları */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* Print color adjustment */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Basic reset */
+  html {
+    background: white !important;
+    background-color: white !important;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: white !important;
+    background-color: white !important;
+  }
+  
+  /* Ensure all containers have white background */
+  div, section, article, main {
+    background-color: transparent !important;
+  }
+  
+  /* Override Tailwind background utility classes */
+  [class*="bg-green"], [class*="bg-blue"], [class*="bg-gray"],
+  [class*="bg-mint"], [class*="bg-teal"], [class*="bg-emerald"],
+  .bg-green-50, .bg-green-100, .bg-green-200,
+  .bg-blue-50, .bg-blue-100, .bg-blue-200,
+  .bg-gray-50, .bg-gray-100, .bg-gray-200 {
+    background-color: white !important;
+    background: white !important;
+  }
+
+  /* Shadow removal */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Hide print elements */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Ensure images are visible with white background */
+  img {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: white !important;
+    background-color: white !important;
+  }
+}
