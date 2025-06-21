@@ -469,11 +469,20 @@ export const TutanakTemplate = memo(
             <img src="/images/tudor.png" alt="Tudor" style={{ height: '45px', width: 'auto' }} />
           </div>
 
+          <br />
+          <br />
+
           {/* Tarih - sağa dayalı */}
           <p style={{ textAlign: 'right', margin: '8px 0' }}>İZMİR - {currentDate}</p>
 
+          <br />
+          <br />
+
           {/* Başlık - ortalı */}
           <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px', margin: '12px 0' }}>TESLİM TUTANAK</h1>
+
+          <br />
+          <br />
 
           {/* Ana Metin */}
           <p>Alıcı - Müşteri <strong>{customerName}</strong> tarafından, KÜLAHÇIOĞLU DIŞ TİCARET LTD. ŞTİ. Adına;</p>
