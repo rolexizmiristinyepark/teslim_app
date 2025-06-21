@@ -495,7 +495,7 @@ export const THEME = {
   formContainer: {
     // Print view container
     printView: {
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '#F4FCFB',
       boxShadow: 'none',
       border: 'none',
     },

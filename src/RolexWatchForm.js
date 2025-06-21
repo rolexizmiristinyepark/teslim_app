@@ -228,7 +228,7 @@ const RolexWatchForm = () => {
     return (
       <div className="min-h-screen print:shadow-none print:border-none" style={THEME.formContainer.printView}>
         <div className="max-w-4xl mx-auto p-4 print:p-0 print:m-0" style={THEME.formContainer.printView}>
-          <div className="bg-white print:rounded-none print:shadow-none" style={THEME.formContainer.printView}>
+          <div className="print:rounded-none print:shadow-none" style={THEME.formContainer.printView}>
             <Suspense fallback={<div className="flex items-center justify-center h-96"><div className="text-gray-500">Tutanak yükleniyor...</div></div>}>
               <TutanakTemplate
                 formData={formData}
