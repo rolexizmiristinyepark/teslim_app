@@ -470,18 +470,15 @@ export const TutanakTemplate = memo(
           </div>
 
           <br />
-          <br />
 
           {/* Tarih - sağa dayalı */}
           <p style={{ textAlign: 'right', margin: '8px 0' }}>İZMİR - {currentDate}</p>
 
           <br />
-          <br />
 
           {/* Başlık - ortalı */}
           <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px', margin: '12px 0' }}>TESLİM TUTANAK</h1>
 
-          <br />
           <br />
 
           {/* Ana Metin */}
