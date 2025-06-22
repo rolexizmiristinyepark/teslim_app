@@ -9,7 +9,7 @@
  * - Single Responsibility Principle uygulandı
  */
 
-import { ArrowLeft, FileText, Printer, Edit, Trash2 } from 'lucide-react';
+import { Printer, Edit, Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState, lazy, Suspense } from 'react';
 
 import ErrorBoundary from './components/ErrorBoundary';
