@@ -99,45 +99,6 @@ export const loadPaymentHelpers = async () => {
   return loadPromise;
 };
 
-/**
- * Advanced Image Utils lazy loader
- * Sadece gelişmiş image işlemleri gerektiğinde yüklenir
- */
-export const loadAdvancedImageUtils = async () => {
-  const cacheKey = 'advancedImageUtils';
-  
-  if (utilityCache.has(cacheKey)) {
-    return utilityCache.get(cacheKey);
-  }
-  
-  if (loadingPromises.has(cacheKey)) {
-    return loadingPromises.get(cacheKey);
-  }
-  
-  console.log('🔄 Loading Advanced Image Utils chunk...');
-  
-  const loadPromise = import('../utils/imageUtils/advanced')
-    .then(module => {
-      const utils = {
-        preloadImages: module.preloadImages,
-        estimateImageSize: module.estimateImageSize,
-        getOptimizationMetrics: module.getOptimizationMetrics,
-        createImageObserver: module.createImageObserver
-      };
-      utilityCache.set(cacheKey, utils);
-      loadingPromises.delete(cacheKey);
-      console.log('✅ Advanced Image Utils chunk loaded successfully');
-      return utils;
-    })
-    .catch(error => {
-      loadingPromises.delete(cacheKey);
-      console.error('❌ Failed to load Advanced Image Utils chunk:', error);
-      throw error;
-    });
-    
-  loadingPromises.set(cacheKey, loadPromise);
-  return loadPromise;
-};
 
 /**
  * Turkish Language Utils lazy loader
@@ -204,7 +165,6 @@ export const preloadUtilities = {
   onPageIdle: () => {
     // Sayfa 2 saniye idle kaldıktan sonra yükle
     setTimeout(() => {
-      loadAdvancedImageUtils().catch(() => {});
       loadTurkishLanguageUtils().catch(() => {});
     }, 2000);
   }

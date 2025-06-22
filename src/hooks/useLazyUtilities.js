@@ -102,18 +102,6 @@ export const useLazyUtilities = (options = {}) => {
     }
   }, [enableLogging]);
 
-  // Advanced Image Utils lazy loader
-  const loadAdvancedImageUtils = useCallback(async () => {
-    try {
-      const { loadAdvancedImageUtils } = await import('../utils/lazyUtils');
-      return await loadAdvancedImageUtils();
-    } catch (error) {
-      if (enableLogging) {
-        console.error('❌ Failed to load Advanced Image Utils:', error);
-      }
-      throw error;
-    }
-  }, [enableLogging]);
 
   // Turkish Language Utils lazy loader
   const loadTurkishLanguageUtils = useCallback(async () => {
@@ -185,7 +173,6 @@ export const useLazyUtilities = (options = {}) => {
     // Lazy loaders
     loadRmcService,
     loadPaymentHelpers,
-    loadAdvancedImageUtils,
     loadTurkishLanguageUtils,
     
     // Preload management
