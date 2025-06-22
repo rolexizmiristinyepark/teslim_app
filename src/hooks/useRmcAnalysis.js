@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 import { BrandTypes, CategoryTypes } from '../constants/types';
 import { loadRmcService } from '../utils/lazyUtils';
-import { toTurkishUpperCase } from '../utils/stringHelpers/core';
+import { toTurkishUpperCase } from '../utils/stringHelpers';
 
 /**
  * Marka kodlarını CSV'deki BRAND değerleriyle eşleştir

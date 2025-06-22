@@ -117,7 +117,7 @@ export const loadTurkishLanguageUtils = async () => {
   
   console.log('🔄 Loading Turkish Language Utils chunk...');
   
-  const loadPromise = import('../utils/stringHelpers/turkish')
+  const loadPromise = import('../utils/stringHelpers')
     .then(module => {
       const utils = {
         addDirectionSuffix: module.addDirectionSuffix,
