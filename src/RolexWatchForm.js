@@ -201,26 +201,14 @@ const RolexWatchForm = () => {
     window.print();
   }, []);
 
-  // Effects - Payment details lazy loading
+  // Effects - Payment details generation  
   useEffect(() => {
-    const generateDetails = async () => {
-      if (payments.length > 0) {
-        try {
-          const { loadPaymentHelpers } = await import('./utils/lazyUtils');
-          const helpers = await loadPaymentHelpers();
-          const details = helpers.generatePaymentDetailsText(payments, formData, selectedBrand, selectedCategory);
-          setPaymentDetailsText(details);
-        } catch (error) {
-          console.warn('Failed to load payment helpers, using fallback');
-          // Fallback - basit metin oluştur
-          setPaymentDetailsText(`Ödeme detayları: ${payments.length} ödeme kaydı`);
-        }
-      } else {
-        setPaymentDetailsText('');
-      }
-    };
-    
-    generateDetails();
+    if (payments.length > 0) {
+      const details = generatePaymentDetailsText(payments, formData, selectedBrand, selectedCategory);
+      setPaymentDetailsText(details);
+    } else {
+      setPaymentDetailsText('');
+    }
   }, [payments, formData, selectedBrand, selectedCategory]);
 
   // Tutanak görünümü

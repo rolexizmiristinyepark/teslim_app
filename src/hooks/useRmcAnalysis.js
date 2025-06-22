@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 
 import { BrandTypes, CategoryTypes } from '../constants/types';
-import { loadRmcService } from '../utils/lazyUtils';
+import { findExactRmcMatch } from '../utils/newRmcService';
 import { toTurkishUpperCase } from '../utils/stringHelpers';
 
 /**
@@ -69,11 +69,8 @@ export const useRmcAnalysis = (
       setRmcAnalysisResult(null);
 
       try {
-        // RMC Service'i lazy load et
-        const rmcService = await loadRmcService();
-        
-        // Sadece tam eşleşme ara
-        const data = await rmcService.findExactRmcMatch(rmcInput);
+        // Direkt RMC analiz et - no lazy loading
+        const data = await findExactRmcMatch(rmcInput);
 
         if (data) {
           // eslint-disable-next-line no-console
