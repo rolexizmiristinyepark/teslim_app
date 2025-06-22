@@ -1,28 +1,6 @@
 /* Modular CSS Architecture - Organized by Concern */
 
-/* FORCE PAGE BACKGROUND - En yüksek öncelik */
-html,
-body,
-body *,
-#root,
-.App {
-  background: #F4FCFB !important;
-}
-
-html {
-  background-color: #F4FCFB !important;
-}
-
-body {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-}
-
-/* Tailwind override */
-body.bg-white {
-  background: #F4FCFB !important;
-  background-color: #F4FCFB !important;
-}
+/* CSS Imports - Background tanımları base.css'de yapılıyor */
 
 /* 1. CSS Variables - Tüm değişkenler ve tokens */
 @import './styles/variables.css';

@@ -5,15 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global Base Styles - Tek body tanımı */
+/* Global Base Styles */
+html,
 body,
-html body,
 #root {
   margin: 0;
+  padding: 0;
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--page-background) !important;
+  background: #F4FCFB !important;
   background-color: #F4FCFB !important;
   min-height: 100vh;
   color: #243C4C !important;
@@ -55,10 +56,6 @@ button {
 
 body * {
   background-color: inherit;
-}
-
-body {
-  background: #F4FCFB !important;
 }
 
 code {
