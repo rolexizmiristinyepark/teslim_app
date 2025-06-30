@@ -3,37 +3,25 @@
  * Müşteri adı ve teslim edilen kişi input'larını yönetir
  */
 
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 const CustomerForm = memo(({
   formData,
   validationErrors,
-  inputClass,
-  onChange,
-  selectedBrand,
-  selectedCategory
+  onChange
 }) => {
   // Not: Input background renkleri artık CSS variable'ları ile yönetiliyor (useTheme hook'u)
-  
+
   return (
     <>
       {/* Müşteri */}
       <div className="w-full flex flex-col gap-1 mb-2">
-        <label className="font-semibold text-xs text-[#003057]">Müşteri Adı Soyadı</label>
+        <label htmlFor="musteri" className="font-semibold text-xs text-[#003057]">Müşteri Adı Soyadı</label>
         <input
           required
-          className={`input-filled outline-none ${
-            validationErrors.musteri ? 'border-red-500' : ''
+          className={`input-filled outline-none shadow-none rounded-lg px-3 py-2 text-sm w-full border ${
+            validationErrors.musteri ? 'border-red-500' : 'border-border-gray'
           }`}
-          style={{ 
-            backgroundColor: '#F4FCFB',
-            border: validationErrors.musteri ? '1px solid #ef4444' : '1px solid #ACBCBF',
-            boxShadow: 'none',
-            borderRadius: '8px',
-            padding: '8px 12px',
-            fontSize: '14px',
-            width: '100%'
-          }}
           id="musteri"
           type="text"
           name="musteri"
@@ -51,21 +39,12 @@ const CustomerForm = memo(({
 
       {/* Teslim Edilen Kişi */}
       <div className="w-full flex flex-col gap-1 mb-2">
-        <label className="font-semibold text-xs text-[#003057]">Teslim Edilen Kişi</label>
+        <label htmlFor="teslimEdilenKisi" className="font-semibold text-xs text-[#003057]">Teslim Edilen Kişi</label>
         <input
           required
-          className={`input-filled outline-none ${
-            validationErrors.teslimEdilenKisi ? 'border-red-500' : ''
+          className={`input-filled outline-none shadow-none rounded-lg px-3 py-2 text-sm w-full border ${
+            validationErrors.teslimEdilenKisi ? 'border-red-500' : 'border-border-gray'
           }`}
-          style={{ 
-            backgroundColor: '#F4FCFB',
-            border: validationErrors.teslimEdilenKisi ? '1px solid #ef4444' : '1px solid #ACBCBF',
-            boxShadow: 'none',
-            borderRadius: '8px',
-            padding: '8px 12px',
-            fontSize: '14px',
-            width: '100%'
-          }}
           id="teslimEdilenKisi"
           type="text"
           name="teslimEdilenKisi"

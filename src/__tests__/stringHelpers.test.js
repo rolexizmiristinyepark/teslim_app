@@ -10,7 +10,7 @@ import {
   toTurkishLowerCase,
   generateId,
   addDirectionSuffix,
-  fixWordSpacing
+  fixWordSpacing,
 } from '../utils/stringHelpers';
 
 describe('stringHelpers', () => {
@@ -93,7 +93,7 @@ describe('stringHelpers', () => {
     test('should generate unique IDs', () => {
       const id1 = generateId();
       const id2 = generateId();
-      
+
       expect(id1).not.toBe(id2);
       expect(typeof id1).toBe('string');
       expect(typeof id2).toBe('string');
@@ -105,17 +105,19 @@ describe('stringHelpers', () => {
       // Test with crypto API (if available)
       if (typeof crypto !== 'undefined' && crypto.randomUUID) {
         const cryptoId = generateId();
-        expect(cryptoId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);
+        expect(cryptoId).toMatch(
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+        );
       }
 
       // Test fallback method by temporarily removing crypto
       const originalCrypto = global.crypto;
       global.crypto = undefined;
-      
+
       const fallbackId = generateId();
       expect(typeof fallbackId).toBe('string');
       expect(fallbackId.length).toBeGreaterThan(10);
-      
+
       global.crypto = originalCrypto;
     });
   });

@@ -110,10 +110,7 @@ export const usePayments = (initialCurrentDate) => {
     return payments.length > 1;
   }, [payments.length]);
 
-  const totals = useMemo(
-    () => calculateTotalAmounts(payments),
-    [payments]
-  );
+  const totals = useMemo(() => calculateTotalAmounts(payments), [payments]);
 
   return {
     payments,

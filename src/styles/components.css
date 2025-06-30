@@ -1,5 +1,273 @@
 /* Components - Button, Input ve UI Component Stilleri */
 
+/* ========================================
+   UNIFIED DESIGN SYSTEM
+   ======================================== */
+
+/* Base Button Design - Sadece kenarlık, arka plan yok */
+.btn,
+button {
+  /* Boyut ve spacing */
+  padding: 8px 16px;
+  min-height: 40px;
+  
+  /* Renk - sadece kenarlık */
+  color: #000000;
+  border: 1px solid #cccccc;
+  background: transparent;
+  
+  /* Border radius */
+  border-radius: 8px;
+  
+  /* Font */
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  
+  /* Diğer */
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Button hover state - Gölgeli kenarlık */
+.btn:hover,
+button:hover {
+  border-color: #999999;
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 2px rgba(153, 153, 153, 0.2);
+}
+
+/* Button active state - Aktif durumda gölgeli kenarlık */
+.btn:active,
+button:active,
+.btn.active,
+button.active {
+  transform: translateY(0);
+}
+
+/* Rolex active */
+body.brand-rolex .btn:active,
+body.brand-rolex button:active,
+body.brand-rolex .btn.active,
+body.brand-rolex button.active {
+  box-shadow: 0 0 0 4px rgba(20, 92, 58, 0.3);
+}
+
+/* Tudor active */
+body.brand-tudor .btn:active,
+body.brand-tudor button:active,
+body.brand-tudor .btn.active,
+body.brand-tudor button.active {
+  box-shadow: 0 0 0 4px rgba(190, 3, 0, 0.3);
+}
+
+/* Cufflinks active */
+body.brand-cufflinks .btn:active,
+body.brand-cufflinks button:active,
+body.brand-cufflinks .btn.active,
+body.brand-cufflinks button.active {
+  box-shadow: 0 0 0 4px rgba(0, 48, 87, 0.3);
+}
+
+/* Button focus state - Marka renklerine göre */
+/* Rolex focus */
+body.brand-rolex .btn:focus,
+body.brand-rolex button:focus {
+  box-shadow: 0 0 0 2px rgba(20, 92, 58, 0.3);
+}
+
+/* Tudor focus */
+body.brand-tudor .btn:focus,
+body.brand-tudor button:focus {
+  box-shadow: 0 0 0 2px rgba(190, 3, 0, 0.3);
+}
+
+/* Cufflinks focus */
+body.brand-cufflinks .btn:focus,
+body.brand-cufflinks button:focus {
+  box-shadow: 0 0 0 2px rgba(0, 48, 87, 0.3);
+}
+
+/* Button disabled state */
+.btn:disabled,
+button:disabled,
+.btn.disabled,
+button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button size variants */
+.btn-sm { 
+  padding: 6px 12px; 
+  min-height: 32px; 
+  font-size: 12px; 
+}
+
+.btn-lg { 
+  padding: 12px 24px; 
+  min-height: 48px; 
+  font-size: 16px; 
+}
+
+/* Brand-specific button colors */
+/* Rolex buttons */
+body.brand-rolex .btn,
+body.brand-rolex button {
+  border-color: #145c3a;
+  color: #145c3a;
+}
+
+body.brand-rolex .btn:hover,
+body.brand-rolex button:hover {
+  border-color: #145c3a;
+  box-shadow: 0 0 0 3px rgba(20, 92, 58, 0.2);
+}
+
+/* Tudor buttons */
+body.brand-tudor .btn,
+body.brand-tudor button {
+  border-color: #be0300;
+  color: #be0300;
+}
+
+body.brand-tudor .btn:hover,
+body.brand-tudor button:hover {
+  border-color: #be0300;
+  box-shadow: 0 0 0 3px rgba(190, 3, 0, 0.2);
+}
+
+/* Cufflinks buttons */
+body.brand-cufflinks .btn,
+body.brand-cufflinks button {
+  border-color: #003057;
+  color: #003057;
+}
+
+body.brand-cufflinks .btn:hover,
+body.brand-cufflinks button:hover {
+  border-color: #003057;
+  box-shadow: 0 0 0 3px rgba(0, 48, 87, 0.2);
+}
+
+/* Primary ve danger variants - marka renklerini kullan */
+.btn-primary {
+  font-weight: 600;
+}
+
+.btn-danger {
+  font-weight: 600;
+}
+
+/* Base Input Design - Tüm inputlar için tek tasarım */
+input,
+select,
+textarea {
+  /* Boyut ve spacing - yarı yükseklik */
+  width: 100%;
+  padding: 4px 8px;
+  min-height: 20px;
+  
+  /* Renk ve arka plan */
+  color: #003057;
+  background: var(--mint-green-10);
+  border: 1px solid #cccccc;
+  
+  /* Border radius */
+  border-radius: 6px;
+  
+  /* Font */
+  font-size: 12px;
+  line-height: 1.3;
+  font-family: inherit;
+  
+  /* Diğer */
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Input focus state */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #999999;
+  box-shadow: 0 0 0 2px rgba(204, 204, 204, 0.2);
+}
+
+/* Input disabled state */
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Input error state */
+input.error,
+select.error,
+textarea.error,
+input.border-red-500,
+select.border-red-500,
+textarea.border-red-500 {
+  border-color: #ef4444;
+}
+
+input.error:focus,
+select.error:focus,
+textarea.error:focus,
+input.border-red-500:focus,
+select.border-red-500:focus,
+textarea.border-red-500:focus {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+/* Select arrow - Removed background-image */
+
+/* Textarea specific */
+textarea {
+  min-height: 40px;
+  resize: vertical;
+}
+
+/* Input size variants */
+input.input-sm,
+select.input-sm {
+  padding: 3px 6px;
+  min-height: 16px;
+  font-size: 10px;
+}
+
+input.input-lg,
+select.input-lg {
+  padding: 8px 12px;
+  min-height: 40px;
+  font-size: 14px;
+}
+
+/* Placeholder styles */
+input::placeholder,
+textarea::placeholder {
+  color: #999999;
+  opacity: 1;
+}
+
+/* ========================================
+   LEGACY STYLES TO BE REMOVED
+   ======================================== */
+
 /* Input Container */
 .input_container {
   width: 100%;
@@ -11,126 +279,16 @@
 
 .input_label {
   font-size: 10px;
-  color: #243C4C !important;
+  color: #000000;
   font-weight: 600;
 }
 
-/* Modern Neumorphism Input Fields - YENİ TASARIM */
-.input_field {
-  width: auto;
-  height: 40px;
-  padding: 0 0 0 16px;
-  border-radius: 15px;
-  outline: none;
-  background: #F4FCFB;
-  color: #243C4C !important;
-  border: 1px solid #ACBCBF;
-  box-shadow: none;
-  transition: all var(--transition-normal) cubic-bezier(0.15, 0.83, 0.66, 1);
-}
 
-.input_field:focus {
-  background: #F4FCFB;
-  color: #243C4C !important;
-  border: 1px solid #ACBCBF;
-  box-shadow: 0 0 0 2px rgba(172, 188, 191, 0.2);
-}
 
-/* Yeni Basit Input Sistemi */
-/* Ana form input'ları - solid #ACBCBF çerçeve */
-input.input-filled,
-select.input-filled,
-input[style*="#F0F8FF"],
-input[style*="#5289AD"],
-input[style*="backgroundColor: #F0F8FF"],
-input[style*="backgroundColor: #5289AD"],
-input[style*="background-color: #F0F8FF"],
-input[style*="background-color: #5289AD"] {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
-  color: #243C4C !important;
-}
 
-input.input-filled:focus,
-select.input-filled:focus,
-input[style*="#F0F8FF"]:focus,
-input[style*="#5289AD"]:focus {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
-  color: #243C4C !important;
-  box-shadow: 0 0 0 2px rgba(172, 188, 191, 0.2) !important;
-}
 
-/* Payment modal input'ları - Ana form ile aynı tasarım */
-.payment-modal input.input-filled,
-.payment-modal select.input-filled {
-  background-color: #F4FCFB !important;
-  color: #243C4C !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
-  border-radius: 8px !important;
-  padding: 4px 8px !important;
-  font-size: 12px !important;
-  height: 28px !important;
-  min-height: 28px !important;
-  line-height: 1.2 !important;
-}
 
-.payment-modal input.input-filled:focus,
-.payment-modal select.input-filled:focus {
-  background-color: #F4FCFB !important;
-  color: #243C4C !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: 0 0 0 2px rgba(172, 188, 191, 0.2) !important;
-}
 
-/* Payment modal select elementi için özel stiller */
-.payment-modal select {
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg viewBox='0 0 4 5' xmlns='http://www.w3.org/2000/svg'><path d='m0 1 2 2 2-2' stroke='%23666' fill='none'/></svg>") !important;
-  background-repeat: no-repeat !important;
-  background-position: right 6px center !important;
-  background-size: 10px !important;
-  padding-right: 24px !important;
-}
-
-.payment-modal select option {
-  font-size: 12px !important;
-  padding: 2px 4px !important;
-}
-
-/* Ürün detay kartları - solid #ACBCBF çerçeve */
-.card-style {
-  background-color: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
-}
-
-/* Ödeme kartları - solid #ACBCBF çerçeve */
-.payment-card {
-  background-color: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
-}
-
-/* Error state için input - YENİ TASARIM */
-.input_field.error {
-  background: #F4FCFB;
-  color: #243C4C !important;
-  border: 1px solid #ef4444 !important;
-}
-
-.input_field.error:focus {
-  background: #F4FCFB;
-  color: #243C4C !important;
-  border: 1px solid #ef4444 !important;
-  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
-}
 
 /* Reset input number styles */
 .input_field::-webkit-outer-spin-button,
@@ -160,187 +318,116 @@ select.peer:focus {
   background-size: 12px;
 }
 
-/* Modern Neumorphism Button - Purchase */
+/* Purchase button uses base design with primary colors */
 .purchase--btn {
-  height: 55px;
-  border-radius: 15px;
-  border: none;
-  outline: none;
-  color: var(--pure-white);
+  min-height: 55px;
   font-size: 13px;
   font-weight: 700;
-  background: var(--button-gradient);
-  box-shadow:
-    5px 5px 15px rgba(0, 0, 0, 0.2),
-    -5px -5px 15px rgba(255, 255, 255, 0.1);
-  transition: all var(--transition-normal) cubic-bezier(0.15, 0.83, 0.66, 1);
-  cursor: pointer;
+  border-radius: 15px;
 }
 
-.purchase--btn:hover {
-  box-shadow:
-    3px 3px 10px rgba(0, 0, 0, 0.3),
-    -3px -3px 10px rgba(255, 255, 255, 0.1),
-    0 0 0 2px var(--pure-white);
-  transform: translateY(-2px);
-}
-
-.purchase--btn:disabled,
-.purchase--btn.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  background: #ccc !important;
-  border-color: #ccc !important;
-}
-
-.purchase--btn.disabled:hover {
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-/* Modern Tailwind Inspired Button Group Tasarım */
+/* Button Group - Brand selection */
 .payment--options {
-  width: 100%; /* Müşteri input'u ile aynı genişlik */
+  width: 100%;
   display: inline-flex;
-  border-radius: 8px; /* Müşteri input'u ile aynı border-radius */
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-xs */
-  padding: 0; /* padding kaldırıldı */
-  justify-content: center;
-  margin-bottom: 0.75rem; /* mb-3 için */
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
 }
 
 .payment--options button {
-  padding: 8px 12px; /* Müşteri input'u ile aynı padding */
-  font-size: 14px; /* Müşteri input'u ile aynı font size */
-  font-weight: 500; /* font-medium */
-  background-color: white;
-  border: 1px solid #e5e7eb; /* border-gray-200 */
-  color: #243C4C !important; /* text-gray-900 */
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
-  position: relative;
-  z-index: 10;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1; /* Eşit genişlik dağılımı */
-  min-height: 40px; /* Müşteri input'u ile aynı yükseklik */
-}
-
-/* İlk buton - sol taraf yuvarlatılmış */
-.payment--options button:first-child {
-  border-top-left-radius: 8px; /* Müşteri input'u ile aynı border-radius */
-  border-bottom-left-radius: 8px;
-}
-
-/* Son buton - sağ taraf yuvarlatılmış */
-.payment--options button:last-child {
-  border-top-right-radius: 8px; /* Müşteri input'u ile aynı border-radius */
-  border-bottom-right-radius: 8px;
-}
-
-/* Orta buton - sadece üst/alt border */
-.payment--options button:not(:first-child):not(:last-child) {
-  border-left: none;
-  border-right: none;
+  flex: 1;
+  min-height: 40px;
   border-radius: 0;
 }
 
-/* Bitişik butonlar için border düzeltmesi */
+.payment--options button:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.payment--options button:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
 .payment--options button:not(:first-child) {
   border-left: none;
 }
 
-/* Hover efektleri - hareket kaldırıldı */
-.payment--options button:hover {
-  background-color: #f9fafb; /* hover:bg-gray-100 */
-  color: #243C4C !important; /* hover:text-blue-700 */
+/* Active states with brand colors - white background */
+.payment--options button {
+  background: transparent !important;
 }
 
-/* Focus efektleri */
-.payment--options button:focus {
-  z-index: 20; /* focus:z-10 artırıldı */
-  box-shadow: 0 0 0 2px #1d4ed8; /* focus:ring-2 focus:ring-blue-700 */
-  color: #243C4C !important; /* focus:text-blue-700 */
-}
-
-/* Aktif durumlar - Marka renklerine göre */
 .payment--options button.active {
-  color: white;
+  background: white !important;
+  color: #003057 !important;
   font-weight: 600;
-  z-index: 15;
 }
 
-/* ROLEX Aktif - Yeşil */
-.payment--options button[name="rolex"].active {
-  background-color: #145c3a;
+.payment--options button:hover {
+  background: white !important;
+  color: #003057 !important;
+}
+
+.payment--options button[name='rolex'].active,
+.payment--options button[name='rolex']:hover {
   border-color: #145c3a;
 }
 
-.payment--options button[name="rolex"]:hover {
-  color: #243C4C !important;
-}
-
-/* TUDOR Aktif - Kırmızı */
-.payment--options button[name="tudor"].active {
-  background-color: #be0300;
+.payment--options button[name='tudor'].active,
+.payment--options button[name='tudor']:hover {
   border-color: #be0300;
 }
 
-.payment--options button[name="tudor"]:hover {
-  color: #243C4C !important;
-}
-
-/* CUFFLINKS Aktif - Mavi */
-.payment--options button[name="cufflinks"].active {
-  background-color: #003057;
+.payment--options button[name='cufflinks'].active,
+.payment--options button[name='cufflinks']:hover {
   border-color: #003057;
 }
 
-.payment--options button[name="cufflinks"]:hover {
-  color: #243C4C !important;
-}
-
-/* Geri butonu */
+/* Back button - uses base button + sm variant */
 .back-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #f8f9fa;
-  border: 1px solid var(--border-gray);
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: #243C4C !important;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--transition-fast) ease;
   margin-bottom: 10px;
 }
 
-.back-button:hover {
-  background: var(--border-gray);
-  color: #243C4C !important;
-}
-
-/* Add Payment Button */
+/* Add Payment Button - sadece ikon rengi, marka bazlı */
 .add-payment-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  color: #10b981;
-  font-size: 14px;
-  font-weight: 600;
-  background: none;
   border: none;
-  cursor: pointer;
-  transition: all var(--transition-normal) ease;
+  background: transparent;
+  padding: 16px;
 }
 
-.add-payment-btn:hover {
-  color: #059669;
+/* Rolex add payment */
+body.brand-rolex .add-payment-btn {
+  color: #145c3a;
+}
+
+body.brand-rolex .add-payment-btn:hover {
+  color: #0f4a2e;
+  transform: scale(1.05);
+}
+
+/* Tudor add payment */
+body.brand-tudor .add-payment-btn {
+  color: #be0300;
+}
+
+body.brand-tudor .add-payment-btn:hover {
+  color: #9a0200;
+  transform: scale(1.05);
+}
+
+/* Cufflinks add payment */
+body.brand-cufflinks .add-payment-btn {
+  color: #003057;
+}
+
+body.brand-cufflinks .add-payment-btn:hover {
+  color: #002244;
   transform: scale(1.05);
 }
 
@@ -356,19 +443,9 @@ select.peer:focus {
   font-weight: bold;
 }
 
-/* Payment Button */
+/* Payment button - uses base button design */
 .payment-button {
-  transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.payment-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.payment-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Inherits from base button */
 }
 
 /* Approval Checkbox */
@@ -377,7 +454,7 @@ select.peer:focus {
   padding: 12px;
   background: transparent;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid #cccccc;
 }
 
 .approval-checkbox {
@@ -402,7 +479,7 @@ select.peer:focus {
   border-radius: 4px;
   margin-right: 12px;
   position: relative;
-  border: 1px solid #ACBCBF;
+  border: 1px solid #cccccc;
   box-shadow: none;
   transition: all var(--transition-normal) ease;
 }
@@ -449,7 +526,7 @@ select.peer:focus {
   top: 45%;
   width: 5px;
   height: 10px;
-  border: solid #243C4C;
+  border: solid #000000;
   border-width: 0 2px 2px 0;
   transform: translate(-50%, -50%) rotate(45deg);
 }
@@ -461,7 +538,7 @@ select.peer:focus {
 .approval-text {
   font-size: 13px;
   font-weight: 500;
-  color: #243C4C !important;
+  color: #000000;
   user-select: none;
 }
 
@@ -486,183 +563,54 @@ select.peer:focus {
 }
 
 /* Payment Card - marka bazlı background (YENİ SİSTEM) */
-/* Payment modal içindeki kartların background'larını override et - solid çerçeve */
-.payment-modal .payment-card,
-.payment-modal .card-style,
-html body .payment-modal .payment-card,
-html body .payment-modal .card-style {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
-}
 
-/* Payment modal içindeki input'ların background'larını override et - Ana form ile aynı tasarım */
-.payment-modal input[style*="backgroundColor"],
-.payment-modal select[style*="backgroundColor"],
-.payment-modal input[style*="background-color"],
-.payment-modal select[style*="background-color"],
-.payment-modal input,
-.payment-modal select,
-html body .payment-modal input,
-html body .payment-modal select {
-  background-color: #F4FCFB !important;
-  color: #243C4C !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
-  border-radius: 8px !important;
-  padding: 4px 8px !important;
-  font-size: 12px !important;
-  height: 28px !important;
-  line-height: 1.2 !important;
-}
 
-/* Ana form modal'daki tüm inline style background'larını override et - YENİ TASARIM */
-/* CustomerForm ve RmcInput'taki #F0F8FF ve #5289AD renklerini #F4FCFB yap */
-.main-modal input[style*="#F0F8FF"],
-.main-modal input[style*="#5289AD"],
-.main-modal div[style*="#F0F8FF"],
-.main-modal div[style*="#5289AD"],
-.main-modal .card-style[style*="#5289AD"],
-input[style*="backgroundColor: #F0F8FF"],
-input[style*="backgroundColor: #5289AD"],
-input[style*="background-color: #F0F8FF"],
-input[style*="background-color: #5289AD"],
-div[style*="backgroundColor: #F0F8FF"],
-div[style*="backgroundColor: #5289AD"],
-div[style*="background-color: #F0F8FF"],
-div[style*="background-color: #5289AD"],
-div[style*="#5289AD"],
-input[style*="#5289AD"],
-input[style*="#F0F8FF"] {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
-}
 
 /* Ürün detayları kartındaki satırlar için spesifik override */
 .card-style,
 .card-style div,
 .card-style[style],
 .card-style div[style] {
-  background-color: #ACBCBF !important;
+  background-color: #ffffff;
 }
 
-/* RmcInput'taki detay satırları için çok güçlü override */
-.input_container .card-style div[style],
-.input_container div[style*="backgroundColor: #5289AD"],
-.input_container div[style*="#5289AD"],
-.card-style div[style*="backgroundColor"],
-.card-style div[style*="background-color"],
-.card-style div[style*="#5289AD"],
-div.card-style div,
-[style*="backgroundColor: #5289AD"],
-[style*="background-color: #5289AD"],
-[style*="#5289AD"] {
-  background-color: #ACBCBF !important;
+
+
+/* Card styles unified */
+.card-style,
+.payment-card {
+  border: 1px solid #cccccc;
+  box-shadow: none;
+  border-radius: 8px;
+  padding: 12px;
 }
 
-/* Sadece .card-style içindeki div'ler için güçlü override */
-.card-style div[style*="backgroundColor"],
-.card-style div[style*="background-color"],
-.card-style > div[style],
-.input_container .card-style > div {
-  background-color: #ACBCBF !important;
+.card-style div {
+  border: none;
+  border-radius: 4px;
 }
 
-/* CSS Variables ile override etme */
-:root {
-  --detail-row-bg: #F4FCFB !important;
-  --detail-card-bg: #F4FCFB !important;
-  --detail-card-border: #ACBCBF !important;
-}
 
-/* RmcInput'teki ana kart tasarımı - solid #ACBCBF çerçeve */
-.card-style {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
-  border-radius: 8px !important;
-  padding: 12px !important;
-}
-
-/* Ana kart içindeki tüm satırlar */
-.card-style div,
-.card-style div[style],
-body .card-style div,
-body .input_container .card-style div,
-body .input_container .card-style div[style] {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: none !important;
-  border-radius: 4px !important;
-}
-
-/* Özel inline style override'lar */
-.input_container .card-style div[style*="#5289AD"],
-.card-style div[style*="#5289AD"],
-div[style*="backgroundColor: #5289AD"],
-.card-style div[style*="backgroundColor"],
-.card-style div[style*="background-color"] {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: none !important;
-}
-
-/* CSS Animation ile inline style override - YENİ RENK */
-@keyframes forceBackground {
-  0%, 100% {
-    background-color: #F4FCFB !important;
-    background: #F4FCFB !important;
-    border: none !important;
-  }
-}
-
-.card-style div[style] {
-  animation: forceBackground 0s infinite !important;
-  animation-fill-mode: both !important;
-}
 
 /* En güçlü override kuralları - TÜM olasulıkları kapsar - YENİ TASARIM */
 html body .input_container .card-style,
 html body .card-style {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
+  background-color: #ffffff;
+  background: #ffffff;
+  border: 1px solid #cccccc;
 }
 
 html body .input_container .card-style div,
 html body .card-style div,
 html body .input_container .card-style div[style],
 html body .card-style div[style] {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: none !important;
+  background-color: #ffffff;
+  background: #ffffff;
+  border: none;
 }
 
-/* Specificity: 3-0-0-2 level override - YENİ TASARIM */
-html body .input_container .card-style div[style*="#5289AD"] {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: none !important;
-}
 
-/* Input'lar için en güçlü override - YENİ TASARIM */
-html body input[style],
-html body .input_container input,
-html body .form input {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  border: 1px solid #ACBCBF !important;
-  color: #243C4C !important;
-}
 
-/* Para birimi radio button background'ları - Ana form ile aynı tasarım */
-.payment-modal span[style*="backgroundColor"],
-.payment-modal span[style*="background-color"] {
-  background-color: #F4FCFB !important;
-}
 
 .payment-card .icon-pulse {
   animation: card-icon-animate 0.6s linear alternate-reverse infinite;
@@ -717,7 +665,7 @@ html body .form input {
   justify-content: space-between;
   align-items: center;
   padding: 6px 0;
-  border-bottom: 1px solid #f1f3f4;
+  border-bottom: 1px solid #cccccc;
   background-color: var(--detail-rows-bg); /* Detay satırları için yeni renk */
 }
 
@@ -728,7 +676,7 @@ html body .form input {
 .detail-label {
   font-size: 11px;
   font-weight: 600;
-  color: #243C4C !important;
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -736,7 +684,7 @@ html body .form input {
 .detail-value {
   font-size: 13px;
   font-weight: 500;
-  color: #243C4C !important;
+  color: #000000;
   text-align: right;
   max-width: 60%;
   white-space: nowrap;
@@ -751,27 +699,17 @@ html body .form input {
 }
 
 /* Ödeme modal'ları için floating label uyumlu stiller */
-.payment-modal .w-60 {
-  width: 100% !important;
-  max-width: 280px;
-}
 
 .payment-modal input,
 .payment-modal select {
   transition: all var(--transition-normal) ease;
 }
 
-.payment-modal input:focus,
-.payment-modal select:focus {
-  box-shadow: 0 0 0 2px #003057 !important;
-  color: #243C4C !important;
-}
 
-/* Modern Submit Button Group - Tailwind Inspired */
+/* Submit Button Group - Fixed position, marka renkli */
 .submit-button-group {
   display: inline-flex;
-  border-radius: 0.375rem; /* rounded-md */
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-xs */
+  border-radius: 8px;
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -779,183 +717,65 @@ html body .form input {
 }
 
 .submit-button-group button {
-  padding: 0.5rem 1rem; /* px-4 py-2 */
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500; /* font-medium */
-  background-color: white;
-  border: 1px solid #e5e7eb; /* border-gray-200 */
-  color: #243C4C !important; /* text-gray-900 */
-  cursor: pointer;
-  position: relative;
-  z-index: 10;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   min-width: 120px;
+  border-radius: 0;
+  background: transparent;
 }
 
-/* Submit buton - sol taraf yuvarlatılmış (yeşil) */
 .submit-button-group .submit-btn {
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  background-color: #16a34a; /* bg-green-600 */
-  border-color: #16a34a;
-  color: white;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  font-weight: 600;
+  border-color: #145c3a;
+  color: #145c3a;
 }
 
-.submit-button-group .submit-btn:hover {
-  background-color: #16a34a; /* Hover'da renk değişikliği yok */
-  border-color: #16a34a;
-}
-
-.submit-button-group .submit-btn:focus {
-  box-shadow: 0 0 0 2px #16a34a;
-}
-
-/* Clear buton - sağ taraf yuvarlatılmış (kırmızı) */
 .submit-button-group .clear-btn {
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   border-left: none;
-  background-color: #dc2626; /* bg-red-600 */
-  border-color: #dc2626;
-  color: white;
+  font-weight: 600;
+  border-color: #be0300;
+  color: #be0300;
 }
 
-.submit-button-group .clear-btn:hover {
-  background-color: #dc2626; /* Hover'da renk değişikliği yok */
-  border-color: #dc2626;
+/* Tutanak action buttons - no border */
+.tutanak-action-btn {
+  border: none !important;
+  background: transparent !important;
+  min-height: auto !important;
+  padding: 8px !important;
 }
 
-.submit-button-group .clear-btn:focus {
-  box-shadow: 0 0 0 2px #dc2626;
-  z-index: 20;
-}
+/* Submit buttons - Fixed colors */
 
-/* Button içindeki iconlar */
-.submit-button-group button svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* Eski submit_form stillerini gizle (artık kullanılmayacak) */
-.submit_form {
-  display: none !important;
-}
 
 /* Payment Cards Container Scroll Bar */
-.payment-modal [style*="height: 320px"]::-webkit-scrollbar {
+.payment-modal [style*='height: 320px']::-webkit-scrollbar {
   width: 6px;
 }
 
-.payment-modal [style*="height: 320px"]::-webkit-scrollbar-track {
-  background: #f1f3f4;
+.payment-modal [style*='height: 320px']::-webkit-scrollbar-track {
   border-radius: 3px;
 }
 
-.payment-modal [style*="height: 320px"]::-webkit-scrollbar-thumb {
+.payment-modal [style*='height: 320px']::-webkit-scrollbar-thumb {
   background: #c1c8cd;
   border-radius: 3px;
 }
 
-.payment-modal [style*="height: 320px"]::-webkit-scrollbar-thumb:hover {
+.payment-modal [style*='height: 320px']::-webkit-scrollbar-thumb:hover {
   background: #a8b2ba;
 }
 
-/* Floating Label Input'lar için özel focus stilleri - SOLID TASARIM */
-.input-filled:focus {
-  border: 1px solid #ACBCBF !important;
-  box-shadow: 0 0 0 2px rgba(172, 188, 191, 0.2) !important;
-  background-color: #F4FCFB !important;
-  color: #243C4C !important;
-}
 
-/* Error state'teki input'ların focus durumu - solid kırmızı çerçeve */
-.input-filled.border-red-500:focus {
-  border: 1px solid #ef4444 !important;
-  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
-  background-color: #F4FCFB !important;
-  color: #243C4C !important;
-}
 
-/* Tüm input'lar için global override - solid #ACBCBF çerçeve */
-input:focus,
-select:focus,
-textarea:focus {
-  background-color: #F4FCFB !important;
-  color: #243C4C !important;
-  outline: none !important;
-  --tw-ring-shadow: none !important;
-  --tw-ring-offset-shadow: none !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: 0 0 0 2px rgba(172, 188, 191, 0.2) !important;
-}
-
-/* Tailwind default focus stillerini iptal et - solid #ACBCBF çerçeve */
-input,
-select,
-textarea {
-  background-color: #F4FCFB !important;
-  color: #243C4C !important;
-  --tw-bg-opacity: 1 !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
-}
-
-/* Tailwind bg-blue, bg-white vs iptal et - Ürün detayları için */
-.bg-blue-50,
-.bg-blue-100,
-.bg-blue-200,
-.bg-white,
-.bg-gray-50,
-.bg-gray-100,
-.bg-green-50 {
-  background-color: #ACBCBF !important;
-  color: #243C4C !important;
-}
-
-/* Ek detay background class'ları */
-.bg-yellow-50,
-.bg-indigo-50,
-.bg-purple-50,
-.bg-pink-50,
-.bg-red-50 {
-  background-color: #ACBCBF !important;
-  color: #243C4C !important;
-}
-
-/* Focus ring'leri tamamen iptal et */
-*:focus {
-  --tw-ring-shadow: none !important;
-  --tw-ring-offset-shadow: none !important;
-  box-shadow: none !important;
-}
-
-/* Input'larda herhangi bir autofill, focus vs durumda da #F4FCFB kullan - YENİ TASARIM */
+/* Reset autofill styles - white background */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #F4FCFB inset !important;
-  box-shadow: 0 0 0 30px #F4FCFB inset !important;
-  -webkit-text-fill-color: #243C4C !important;
-}
-
-/* Browser default input stilleri - solid #ACBCBF çerçeve */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="date"],
-input[type="time"],
-input[type="datetime-local"],
-select,
-textarea {
-  background-color: #F4FCFB !important;
-  background: #F4FCFB !important;
-  color: #243C4C !important;
-  border: 1px solid #ACBCBF !important;
-  box-shadow: none !important;
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset;
+  box-shadow: 0 0 0 30px #ffffff inset;
+  -webkit-text-fill-color: #003057;
 }

@@ -313,6 +313,6 @@ export const calculateTotalAmounts = (payments) => {
 
   return {
     string: totalString,
-    byCurrency: nonZeroTotals
+    byCurrency: nonZeroTotals,
   };
 };

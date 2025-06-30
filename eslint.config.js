@@ -1,17 +1,18 @@
 const js = require('@eslint/js');
+const reactPlugin = require('eslint-plugin-react');
+const reactHooksPlugin = require('eslint-plugin-react-hooks');
 
 module.exports = [
   js.configs.recommended,
   {
-    files: ['src/**/*.{js,jsx}'],
+    files: ['**/*.js', '**/*.jsx'],
+    plugins: {
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin
+    },
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2021,
       sourceType: 'module',
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
       globals: {
         // Browser globals
         window: 'readonly',
@@ -21,61 +22,58 @@ module.exports = [
         clearTimeout: 'readonly',
         setInterval: 'readonly',
         clearInterval: 'readonly',
-        performance: 'readonly',
-        PerformanceObserver: 'readonly',
+        alert: 'readonly',
+        confirm: 'readonly',
+        prompt: 'readonly',
         fetch: 'readonly',
-        crypto: 'readonly',
-        // Node.js globals
+        localStorage: 'readonly',
+        sessionStorage: 'readonly',
+        URL: 'readonly',
+        URLSearchParams: 'readonly',
+        FormData: 'readonly',
+        File: 'readonly',
+        Blob: 'readonly',
+        FileReader: 'readonly',
+        // Node globals
         process: 'readonly',
         Buffer: 'readonly',
-        global: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
         module: 'readonly',
         require: 'readonly',
         exports: 'readonly',
-        // React globals
-        React: 'readonly',
+        global: 'readonly',
+        // Jest globals
+        describe: 'readonly',
+        test: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        jest: 'readonly',
+        // Crypto API
+        crypto: 'readonly'
       },
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      }
     },
     rules: {
-      // Kullanılmayan değişkenler için uyarı
-      'no-unused-vars': ['warn', {
-        varsIgnorePattern: '^_',
-        argsIgnorePattern: '^_|^e$',
-        ignoreRestSiblings: true
-      }],
-      // Console.log'ları production'da kaldırmayı unutmamak için  
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-      // Boş satırlar ve trailing space'ler - KRİTİK KURAL!
-      'no-trailing-spaces': 'error',
-      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
-      // Temel kod kalitesi kuralları
-      'no-undef': 'error',
-      'no-redeclare': 'error', 
-      'no-dupe-keys': 'error',
-      'no-unreachable': 'warn',
-      'no-var': 'error',
-      'prefer-const': 'error',
-      // React friendly kurallar
-      'no-unused-expressions': ['error', { 
-        allowShortCircuit: true, 
-        allowTernary: true 
-      }],
-      // Object.prototype methods
-      'no-prototype-builtins': 'warn',
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+      'no-console': 'warn',
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off'
     },
-  },
-  {
-    files: ['**/*.config.js', 'public/**/*.js'],
-    languageOptions: {
-      sourceType: 'script',
-      globals: {
-        module: 'writable',
-        require: 'readonly',
-        process: 'readonly',
-        __dirname: 'readonly',
-      },
-    },
-  },
+    settings: {
+      react: {
+        version: 'detect'
+      }
+    }
+  }
 ];

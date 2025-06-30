@@ -16,6 +16,7 @@ const ThrowError = ({ shouldThrow }) => {
 };
 
 // Console.error'ı mock'la - test sırasında error loglarını engellemek için
+/* eslint-disable no-console */
 const originalError = console.error;
 beforeAll(() => {
   console.error = jest.fn();
@@ -24,6 +25,7 @@ beforeAll(() => {
 afterAll(() => {
   console.error = originalError;
 });
+/* eslint-enable no-console */
 
 describe('ErrorBoundary', () => {
   beforeEach(() => {
@@ -48,7 +50,9 @@ describe('ErrorBoundary', () => {
     );
 
     expect(screen.getByText('Bir Hata Oluştu')).toBeInTheDocument();
-    expect(screen.getByText(/Üzgünüz, uygulamada beklenmeyen bir hata oluştu/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Üzgünüz, uygulamada beklenmeyen bir hata oluştu/)
+    ).toBeInTheDocument();
   });
 
   test('should show error details in development mode', () => {
@@ -62,7 +66,7 @@ describe('ErrorBoundary', () => {
     );
 
     expect(screen.getByText('Teknik Detaylar')).toBeInTheDocument();
-    
+
     process.env.NODE_ENV = originalEnv;
   });
 
@@ -77,30 +81,35 @@ describe('ErrorBoundary', () => {
     );
 
     expect(screen.queryByText('Teknik Detaylar')).not.toBeInTheDocument();
-    
+
     process.env.NODE_ENV = originalEnv;
   });
 
   test('should have retry button that resets error state', () => {
-    const { rerender } = render(
+    // Create a component that can be controlled
+    let shouldThrow = true;
+    const ControlledError = () => {
+      if (shouldThrow) {
+        throw new Error('Test error');
+      }
+      return <div>No Error</div>;
+    };
+
+    render(
       <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
+        <ControlledError />
       </ErrorBoundary>
     );
 
     // Error UI should be visible
     expect(screen.getByText('Bir Hata Oluştu')).toBeInTheDocument();
 
+    // Change the state so it won't throw on retry
+    shouldThrow = false;
+
     // Click retry button
     const retryButton = screen.getByText('Tekrar Dene');
     fireEvent.click(retryButton);
-
-    // Re-render with no error
-    rerender(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={false} />
-      </ErrorBoundary>
-    );
 
     // Should show normal content again
     expect(screen.getByText('No Error')).toBeInTheDocument();
@@ -111,7 +120,7 @@ describe('ErrorBoundary', () => {
     const mockReload = jest.fn();
     Object.defineProperty(window, 'location', {
       value: { reload: mockReload },
-      writable: true
+      writable: true,
     });
 
     render(
@@ -127,9 +136,15 @@ describe('ErrorBoundary', () => {
   });
 
   test('should log error details when error occurs', () => {
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    const consoleGroupSpy = jest.spyOn(console, 'group').mockImplementation(() => {});
-    const consoleGroupEndSpy = jest.spyOn(console, 'groupEnd').mockImplementation(() => {});
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const consoleGroupSpy = jest
+      .spyOn(console, 'group')
+      .mockImplementation(() => {});
+    const consoleGroupEndSpy = jest
+      .spyOn(console, 'groupEnd')
+      .mockImplementation(() => {});
 
     render(
       <ErrorBoundary>
@@ -154,8 +169,12 @@ describe('ErrorBoundary', () => {
     );
 
     expect(screen.getByText('Bir Hata Oluştu')).toBeInTheDocument();
-    expect(screen.getByText(/Üzgünüz, uygulamada beklenmeyen bir hata oluştu/)).toBeInTheDocument();
-    expect(screen.getByText(/Lütfen sayfayı yenilemeyi deneyin/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Üzgünüz, uygulamada beklenmeyen bir hata oluştu/)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Lütfen sayfayı yenilemeyi deneyin/)
+    ).toBeInTheDocument();
     expect(screen.getByText('Tekrar Dene')).toBeInTheDocument();
     expect(screen.getByText('Sayfayı Yenile')).toBeInTheDocument();
   });
@@ -167,7 +186,11 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    expect(screen.getByText(/Sorun devam ederse lütfen teknik destek ile iletişime geçin/)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Sorun devam ederse lütfen teknik destek ile iletişime geçin/
+      )
+    ).toBeInTheDocument();
   });
 
   test('should handle multiple errors correctly', () => {

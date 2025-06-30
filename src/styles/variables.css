@@ -10,12 +10,15 @@
   --brand-color: #f2f2f2; /* Default loader color */
 
   /* Common Colors */
-  --white: #f6f3e7;
+  --white: #ffffff;
   --pure-white: #ffffff;
-  --border-gray: #e9ecef;
+  --border-gray: #cccccc;
+  --mint-green-50: #f0fdf4;
+  --mint-green-20: #f0f9f1;
+  --mint-green-10: #f8fef9;
 
   /* Layout Colors */
-  --detail-rows-bg: #F4FCFB; /* Detay satırları arkaplan rengi */
+  --detail-rows-bg: #ffffff; /* Detay satırları arkaplan rengi */
 
   /* Shadows */
   --modern-shadow:

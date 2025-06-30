@@ -4,15 +4,15 @@
  */
 
 import { useMemo, useState, useEffect } from 'react';
-import { BrandTypes, CategoryTypes, BrandColors, CategoryColors } from '../../../constants/types';
-import { validateSerial, getSerialMinLength } from '../../../utils/formValidation';
+import { BrandTypes, CategoryTypes } from '../../../constants/types';
+import { getSerialMinLength } from '../../../utils/formValidation';
+import { isCufflinks } from '../../../utils/brandHelpers';
 
 const RmcInput = ({
   formData,
   selectedBrand,
   selectedCategory,
   validationErrors,
-  inputClass,
   rmcAnalysisResult,
   rmcMessage,
   isProductChecked,
@@ -28,13 +28,13 @@ const RmcInput = ({
   useEffect(() => {
     setSerialTouched(false);
   }, [selectedBrand, selectedCategory]);
-  
+
   // Not: Input background renkleri artık CSS variable'ları ile yönetiliyor (useTheme hook'u)
   // Seri input'unun gösterilip gösterilmeyeceğini belirle
   const showSeriInput = (
     selectedBrand === BrandTypes.TUDOR ||
     (selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.SAAT) ||
-    (selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.AKSESUAR)
+    isCufflinks(selectedBrand, selectedCategory)
   );
 
   // Seri numarası validasyonu ve uyarı mesajı
@@ -51,25 +51,25 @@ const RmcInput = ({
 
     // Karakter sayısı kontrolü
     if (trimmedSerial.length < minLength) {
-      return { 
-        isValid: false, 
-        message: `En az ${minLength} karakter olmalıdır` 
+      return {
+        isValid: false,
+        message: `En az ${minLength} karakter olmalıdır`
       };
     }
 
     // Harf kontrolü
     if (!hasLetter) {
-      return { 
-        isValid: false, 
-        message: 'En az 1 harf içermelidir' 
+      return {
+        isValid: false,
+        message: 'En az 1 harf içermelidir'
       };
     }
 
     // Rakam kontrolü
     if (!hasNumber) {
-      return { 
-        isValid: false, 
-        message: 'En az 1 rakam içermelidir' 
+      return {
+        isValid: false,
+        message: 'En az 1 rakam içermelidir'
       };
     }
 
@@ -82,22 +82,12 @@ const RmcInput = ({
       <div className="input_container mb-2">
         <div className="flex gap-4">
           <div className="w-full flex flex-col gap-1 mb-0">
-            <label className="font-semibold text-xs text-[#003057]">RMC</label>
+            <label htmlFor="rmc" className="font-semibold text-xs text-[#003057]">RMC Kodu</label>
             <input
               required
-              className={`input-filled outline-none ${
-                validationErrors.rmc || rmcMessage.type === 'error' ? 'border-red-500' : ''
+              className={`input-filled outline-none  shadow-none rounded-lg px-3 py-2 text-sm w-full border ${
+                validationErrors.rmc || rmcMessage.type === 'error' ? 'border-red-500' : 'border-border-gray'
               }`}
-              style={{ 
-                backgroundColor: '#F4FCFB',
-                color: '#243C4C',
-                border: (validationErrors.rmc || rmcMessage.type === 'error') ? '1px solid #ef4444' : '1px solid #ACBCBF',
-                boxShadow: 'none',
-                borderRadius: '8px',
-                padding: '8px 12px',
-                fontSize: '14px',
-                width: '100%'
-              }}
               id="rmc"
               type="text"
               name="rmc"
@@ -109,23 +99,13 @@ const RmcInput = ({
           </div>
           {showSeriInput && (
             <div className="w-full flex flex-col gap-1 mb-0">
-              <label className="font-semibold text-xs text-[#003057]">SERİ</label>
+              <label htmlFor="seri" className="font-semibold text-xs text-[#003057]">Seri Numarası</label>
               <input
               required
-              className={`input-filled outline-none ${
-              (!serialValidation.isValid && serialTouched) ? 'border-red-500' : 
-              validationErrors.seri ? 'border-red-500' : ''
+              className={`input-filled outline-none  shadow-none rounded-lg px-3 py-2 text-sm w-full border ${
+              (!serialValidation.isValid && serialTouched) ? 'border-red-500' :
+              validationErrors.seri ? 'border-red-500' : 'border-border-gray'
               }`}
-              style={{ 
-                backgroundColor: '#F4FCFB',
-                color: '#243C4C',
-                border: ((!serialValidation.isValid && serialTouched) || validationErrors.seri) ? '1px solid #ef4444' : '1px solid #ACBCBF',
-                boxShadow: 'none',
-                borderRadius: '8px',
-                padding: '8px 12px',
-                fontSize: '14px',
-                width: '100%'
-              }}
               id="seri"
               type="text"
               name="seri"
@@ -170,34 +150,15 @@ const RmcInput = ({
       {rmcAnalysisResult && rmcMessage.type !== 'error' && formData.rmc && (
         <div className="input_container mb-2">
         <label className="font-semibold text-xs text-[#003057] mb-2 block">Ürün Detayları</label>
-        <div className="card-style" style={{
-        padding: '12px',
-        borderRadius: '8px',
-        backgroundColor: '#F4FCFB'
-        }}>
+        <div className="card-style p-3 rounded-lg bg-mint-50">
             {/* ROLEX ve TUDOR için detaylar */}
             {rmcAnalysisResult && (selectedBrand === BrandTypes.ROLEX || selectedBrand === BrandTypes.TUDOR) && (
               <>
                 {rmcAnalysisResult?.FAMILY && (
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '6px',
-                    fontSize: '12px',
-                    backgroundColor: '#F4FCFB',
-                    padding: '4px 8px',
-                    borderRadius: '4px'
-                  }}>
-                    <span style={{ color: '#243C4C', fontWeight: '600' }}>Aile:</span>
+                  <div className="flex justify-between mb-1.5 text-xs bg-mint-50 px-2 py-1 rounded">
+                    <span className="text-[#003057] font-semibold">Aile:</span>
                     <span
-                      style={{
-                        color: '#243C4C',
-                        fontWeight: '500',
-                        maxWidth: '150px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                      }}
+                      className="text-[#003057] font-medium max-w-[150px] whitespace-nowrap overflow-hidden text-ellipsis"
                       title={rmcAnalysisResult.FAMILY}
                     >
                       {rmcAnalysisResult.FAMILY}
@@ -205,25 +166,10 @@ const RmcInput = ({
                   </div>
                 )}
                 {rmcAnalysisResult?.SIZE && (
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '6px',
-                    fontSize: '12px',
-                    backgroundColor: '#F4FCFB',
-                    padding: '4px 8px',
-                    borderRadius: '4px'
-                  }}>
-                    <span style={{ color: '#243C4C', fontWeight: '600' }}>Size:</span>
+                  <div className="flex justify-between mb-1.5 text-xs bg-mint-50 px-2 py-1 rounded">
+                    <span className="text-[#003057] font-semibold">Size:</span>
                     <span
-                      style={{
-                        color: '#243C4C',
-                        fontWeight: '500',
-                        maxWidth: '150px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                      }}
+                      className="text-[#003057] font-medium max-w-[150px] whitespace-nowrap overflow-hidden text-ellipsis"
                       title={rmcAnalysisResult.SIZE}
                     >
                       {rmcAnalysisResult.SIZE}
@@ -231,63 +177,25 @@ const RmcInput = ({
                   </div>
                 )}
                 {rmcAnalysisResult?.DIAL && (
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '6px',
-                    fontSize: '12px',
-                    backgroundColor: '#F4FCFB',
-                    padding: '4px 8px',
-                    borderRadius: '4px'
-                  }}>
-                    <span style={{ color: '#243C4C', fontWeight: '600' }}>Kadran:</span>
-                    <span style={{
-                      color: '#243C4C',
-                      fontWeight: '500',
-                      maxWidth: '150px',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis'
-                    }}>
+                  <div className="flex justify-between mb-1.5 text-xs bg-mint-50 px-2 py-1 rounded">
+                    <span className="text-[#003057] font-semibold">Kadran:</span>
+                    <span className="text-[#003057] font-medium max-w-[150px] whitespace-nowrap overflow-hidden text-ellipsis">
                       {rmcAnalysisResult.DIAL}
                     </span>
                   </div>
                 )}
                 {rmcAnalysisResult?.BRACELET && (
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '6px',
-                    fontSize: '12px',
-                    backgroundColor: '#F4FCFB',
-                    padding: '4px 8px',
-                    borderRadius: '4px'
-                  }}>
-                    <span style={{ color: '#243C4C', fontWeight: '600' }}>Bilezik:</span>
-                    <span style={{
-                      color: '#243C4C',
-                      fontWeight: '500',
-                      maxWidth: '150px',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis'
-                    }}>
+                  <div className="flex justify-between mb-1.5 text-xs bg-mint-50 px-2 py-1 rounded">
+                    <span className="text-[#003057] font-semibold">Bilezik:</span>
+                    <span className="text-[#003057] font-medium max-w-[150px] whitespace-nowrap overflow-hidden text-ellipsis">
                       {rmcAnalysisResult.BRACELET}
                     </span>
                   </div>
                 )}
                 {rmcAnalysisResult?.PRICE && (
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '6px',
-                    fontSize: '12px',
-                    backgroundColor: '#F4FCFB',
-                    padding: '4px 8px',
-                    borderRadius: '4px'
-                  }}>
-                    <span style={{ color: '#243C4C', fontWeight: '600' }}>Fiyat:</span>
-                    <span style={{ color: '#243C4C', fontWeight: '700' }}>
+                  <div className="flex justify-between mb-1.5 text-xs bg-mint-50 px-2 py-1 rounded">
+                    <span className="text-[#003057] font-semibold">Fiyat:</span>
+                    <span className="text-[#003057] font-bold">
                       {rmcAnalysisResult.PRICE}
                     </span>
                   </div>
@@ -295,43 +203,20 @@ const RmcInput = ({
               </>
             )}
             {/* CUFFLINKS için açıklama */}
-            {selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.AKSESUAR && (
+            {isCufflinks(selectedBrand, selectedCategory) && (
               <>
                 {rmcAnalysisResult?.DETAIL && (
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '6px',
-                    fontSize: '12px',
-                    backgroundColor: '#F4FCFB',
-                    padding: '4px 8px',
-                    borderRadius: '4px'
-                  }}>
-                    <span style={{ color: '#243C4C', fontWeight: '600' }}>Açıklama:</span>
-                    <span style={{
-                      color: '#243C4C',
-                      fontWeight: '500',
-                      maxWidth: '150px',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis'
-                    }}>
+                  <div className="flex justify-between mb-1.5 text-xs bg-mint-50 px-2 py-1 rounded">
+                    <span className="text-[#003057] font-semibold">Açıklama:</span>
+                    <span className="text-[#003057] font-medium max-w-[150px] whitespace-nowrap overflow-hidden text-ellipsis">
                       {rmcAnalysisResult.DETAIL}
                     </span>
                   </div>
                 )}
                 {rmcAnalysisResult?.PRICE && (
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '6px',
-                    fontSize: '12px',
-                    backgroundColor: '#F4FCFB',
-                    padding: '4px 8px',
-                    borderRadius: '4px'
-                  }}>
-                    <span style={{ color: '#243C4C', fontWeight: '600' }}>Fiyat:</span>
-                    <span style={{ color: '#243C4C', fontWeight: '700' }}>
+                  <div className="flex justify-between mb-1.5 text-xs bg-mint-50 px-2 py-1 rounded">
+                    <span className="text-[#003057] font-semibold">Fiyat:</span>
+                    <span className="text-[#003057] font-bold">
                       {rmcAnalysisResult.PRICE}
                     </span>
                   </div>

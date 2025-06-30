@@ -18,7 +18,7 @@ describe('dateHelpers', () => {
       jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
 
       const result = getCurrentDate();
-      
+
       expect(result).toBe('15.01.2024');
       expect(typeof result).toBe('string');
     });
@@ -32,23 +32,25 @@ describe('dateHelpers', () => {
       ];
 
       testCases.forEach(({ date, expected }) => {
-        const mockDate = new Date(date);
-        jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
-        
+        jest.useFakeTimers();
+        jest.setSystemTime(new Date(date));
+
         const result = getCurrentDate();
         expect(result).toBe(expected);
-        
-        jest.restoreAllMocks();
+
+        jest.useRealTimers();
       });
     });
 
     test('should handle edge cases correctly', () => {
       // Leap year test
-      const leapYearDate = new Date('2024-02-29T10:00:00.000Z');
-      jest.spyOn(global, 'Date').mockImplementation(() => leapYearDate);
-      
+      jest.useFakeTimers();
+      jest.setSystemTime(new Date('2024-02-29T10:00:00.000Z'));
+
       const result = getCurrentDate();
       expect(result).toBe('29.02.2024');
+      
+      jest.useRealTimers();
     });
 
     test('should return string format', () => {

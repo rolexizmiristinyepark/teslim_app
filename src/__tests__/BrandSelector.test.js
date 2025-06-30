@@ -3,7 +3,6 @@
  * BrandSelector.js bileşeninin test edilmesi
  */
 
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import BrandSelector from '../components/RolexWatchForm/MainForm/BrandSelector';
 import { BrandTypes, CategoryTypes } from '../constants/types';
@@ -13,7 +12,7 @@ describe('BrandSelector', () => {
     selectedBrand: BrandTypes.ROLEX,
     selectedCategory: CategoryTypes.SAAT,
     onBrandChange: jest.fn(),
-    onCategoryChange: jest.fn()
+    onCategoryChange: jest.fn(),
   };
 
   beforeEach(() => {
@@ -25,60 +24,98 @@ describe('BrandSelector', () => {
 
     expect(screen.getByText('ROLEX')).toBeInTheDocument();
     expect(screen.getByText('TUDOR')).toBeInTheDocument();
+    expect(screen.getByText('CUFFLINKS')).toBeInTheDocument();
   });
 
-  test('should render category buttons correctly', () => {
-    render(<BrandSelector {...defaultProps} />);
+  test('should handle ROLEX selection for watch category', () => {
+    const onBrandChange = jest.fn();
+    const onCategoryChange = jest.fn();
+    
+    render(
+      <BrandSelector
+        {...defaultProps}
+        onBrandChange={onBrandChange}
+        onCategoryChange={onCategoryChange}
+      />
+    );
 
-    expect(screen.getByText('SAAT')).toBeInTheDocument();
-    expect(screen.getByText('AKSESUAR')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('ROLEX'));
+    
+    expect(onBrandChange).toHaveBeenCalledWith('ROLEX');
+    expect(onCategoryChange).toHaveBeenCalledWith('SAAT');
   });
 
   test('should highlight selected brand', () => {
-    render(<BrandSelector {...defaultProps} selectedBrand={BrandTypes.ROLEX} />);
+    render(
+      <BrandSelector {...defaultProps} selectedBrand={BrandTypes.ROLEX} />
+    );
 
     const rolexButton = screen.getByText('ROLEX');
     const tudorButton = screen.getByText('TUDOR');
 
     // Rolex should be selected (have active styling)
-    expect(rolexButton).toHaveClass('brand-button-rolex');
-    expect(tudorButton).toHaveClass('brand-button-tudor');
+    expect(rolexButton).toHaveClass('active');
+    expect(tudorButton).not.toHaveClass('active');
   });
 
-  test('should highlight selected category', () => {
-    render(<BrandSelector {...defaultProps} selectedCategory={CategoryTypes.SAAT} />);
+  test('should highlight CUFFLINKS when ROLEX brand with AKSESUAR category is selected', () => {
+    render(
+      <BrandSelector
+        {...defaultProps}
+        selectedBrand={BrandTypes.ROLEX}
+        selectedCategory={CategoryTypes.AKSESUAR}
+      />
+    );
 
-    const saatButton = screen.getByText('SAAT');
-    const aksesuarButton = screen.getByText('AKSESUAR');
-
-    // Both buttons should be rendered
-    expect(saatButton).toBeInTheDocument();
-    expect(aksesuarButton).toBeInTheDocument();
+    const cufflinksButton = screen.getByText('CUFFLINKS');
+    expect(cufflinksButton).toHaveClass('active');
   });
 
-  test('should call onBrandChange when brand button is clicked', () => {
+  test('should call onBrandChange when TUDOR button is clicked', () => {
     const onBrandChange = jest.fn();
-    render(<BrandSelector {...defaultProps} onBrandChange={onBrandChange} />);
+    const onCategoryChange = jest.fn();
+    
+    render(
+      <BrandSelector
+        {...defaultProps}
+        onBrandChange={onBrandChange}
+        onCategoryChange={onCategoryChange}
+      />
+    );
 
-    const tudorButton = screen.getByText('TUDOR');
-    fireEvent.click(tudorButton);
+    fireEvent.click(screen.getByText('TUDOR'));
 
     expect(onBrandChange).toHaveBeenCalledWith(BrandTypes.TUDOR);
+    expect(onCategoryChange).toHaveBeenCalledWith(CategoryTypes.SAAT);
   });
 
-  test('should call onCategoryChange when category button is clicked', () => {
+  test('should handle CUFFLINKS selection correctly', () => {
+    const onBrandChange = jest.fn();
     const onCategoryChange = jest.fn();
-    render(<BrandSelector {...defaultProps} onCategoryChange={onCategoryChange} />);
+    
+    render(
+      <BrandSelector
+        {...defaultProps}
+        onBrandChange={onBrandChange}
+        onCategoryChange={onCategoryChange}
+      />
+    );
 
-    const aksesuarButton = screen.getByText('AKSESUAR');
-    fireEvent.click(aksesuarButton);
+    fireEvent.click(screen.getByText('CUFFLINKS'));
 
+    expect(onBrandChange).toHaveBeenCalledWith(BrandTypes.ROLEX);
     expect(onCategoryChange).toHaveBeenCalledWith(CategoryTypes.AKSESUAR);
   });
 
   test('should handle Tudor brand selection correctly', () => {
     const onBrandChange = jest.fn();
-    render(<BrandSelector {...defaultProps} onBrandChange={onBrandChange} selectedBrand={BrandTypes.TUDOR} />);
+    render(
+      <BrandSelector
+        {...defaultProps}
+        onBrandChange={onBrandChange}
+        selectedBrand={BrandTypes.TUDOR}
+      />
+    );
 
     const tudorButton = screen.getByText('TUDOR');
     expect(tudorButton).toBeInTheDocument();
@@ -90,16 +127,12 @@ describe('BrandSelector', () => {
     expect(onBrandChange).toHaveBeenCalledWith(BrandTypes.ROLEX);
   });
 
-  test('should show both category options for all brands', () => {
-    // Test with Rolex
-    render(<BrandSelector {...defaultProps} selectedBrand={BrandTypes.ROLEX} />);
-    expect(screen.getByText('SAAT')).toBeInTheDocument();
-    expect(screen.getByText('AKSESUAR')).toBeInTheDocument();
-
-    // Re-render with Tudor
-    render(<BrandSelector {...defaultProps} selectedBrand={BrandTypes.TUDOR} />);
-    expect(screen.getByText('SAAT')).toBeInTheDocument();
-    expect(screen.getByText('AKSESUAR')).toBeInTheDocument();
+  test('should render all three brand options', () => {
+    render(<BrandSelector {...defaultProps} />);
+    
+    expect(screen.getByText('ROLEX')).toBeInTheDocument();
+    expect(screen.getByText('TUDOR')).toBeInTheDocument();
+    expect(screen.getByText('CUFFLINKS')).toBeInTheDocument();
   });
 
   test('should have proper accessibility attributes', () => {
@@ -115,10 +148,10 @@ describe('BrandSelector', () => {
   test('should not call handlers when already selected option is clicked', () => {
     const onBrandChange = jest.fn();
     const onCategoryChange = jest.fn();
-    
+
     render(
-      <BrandSelector 
-        {...defaultProps} 
+      <BrandSelector
+        {...defaultProps}
         onBrandChange={onBrandChange}
         onCategoryChange={onCategoryChange}
         selectedBrand={BrandTypes.ROLEX}
@@ -126,12 +159,10 @@ describe('BrandSelector', () => {
       />
     );
 
-    // Click already selected options
+    // Click already selected option (ROLEX is already selected)
     const rolexButton = screen.getByText('ROLEX');
-    const saatButton = screen.getByText('SAAT');
-    
+
     fireEvent.click(rolexButton);
-    fireEvent.click(saatButton);
 
     // Should still call handlers (component doesn't prevent this)
     expect(onBrandChange).toHaveBeenCalledWith(BrandTypes.ROLEX);
@@ -141,10 +172,11 @@ describe('BrandSelector', () => {
   test('should render with consistent styling structure', () => {
     const { container } = render(<BrandSelector {...defaultProps} />);
 
-    // Check for brand selection section
-    expect(container.querySelector('.brand-selection')).toBeInTheDocument();
+    // Check for payment options container
+    expect(container.querySelector('.payment--options')).toBeInTheDocument();
     
-    // Check for category selection section  
-    expect(container.querySelector('.category-selection')).toBeInTheDocument();
+    // Check that all buttons are rendered
+    const buttons = container.querySelectorAll('button');
+    expect(buttons).toHaveLength(3); // ROLEX, TUDOR, CUFFLINKS
   });
 });

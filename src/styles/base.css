@@ -7,46 +7,31 @@
 
 /* Global Base Styles */
 html,
-body,
 #root {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
   font-family: var(--font-family);
+  background: #f8fef9; /* mint green 10 - çok hafif ton */
+  color: #000000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #F4FCFB !important;
-  background-color: #F4FCFB !important;
-  min-height: 100vh;
-  color: #243C4C !important;
 }
 
-/* Global text color override - TÜM YAZI RENKLERİ #243C4C */
-*, *::before, *::after {
-  color: #243C4C !important;
+/* Global text color override - TÜM YAZI RENKLERİ #000000 */
+*,
+*::before,
+*::after {
+  color: #000000;
 }
 
-/* Sadece input'larda da #F4FCFB yazı + ince #ACBCBF çerçeve olacak - YENİ TASARIM */
-input, select, textarea {
-  background-color: #F4FCFB !important;
-  color: #243C4C !important;
-  border: 1px solid #ACBCBF !important;
-}
-
-/* Placeholder'lar da #F4FCFB olacak */
-input::placeholder, textarea::placeholder {
-  color: #F4FCFB !important;
-}
-
-/* Button'lardaki yazılar da #243C4C olacak (submit butonları hariç) */
-button {
-  color: #243C4C !important;
-}
-
-/* Submit butonları ve success/error butonlarında beyaz yazı kalacak */
-.submit-btn, .clear-btn, .purchase--btn,
-.bg-green-600, .bg-red-600, .bg-blue-600,
+/* Special text color overrides only when needed */
 .text-white {
-  color: white !important;
+  color: white;
 }
 
 /* Çok güçlü override */
@@ -54,9 +39,9 @@ button {
   --tw-bg-opacity: 1;
 }
 
-body * {
+/* body * {
   background-color: inherit;
-}
+} */
 
 code {
   font-family: var(--font-mono);
@@ -70,26 +55,10 @@ code {
   transition-duration: 150ms;
 }
 
-/* Modern button hover states */
-button {
-  transition: all var(--transition-fast) cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-button:hover {
-  transform: translateY(-1px);
-}
-
-/* Payment options butonlarında hareket efektini kaldır */
-.payment--options button:hover {
-  transform: none;
-}
-
+/* Button hover overrides for specific cases */
+.payment--options button:hover,
 .payment--options button:active {
   transform: none;
-}
-
-button:active {
-  transform: translateY(0);
 }
 
 /* Typography */
@@ -105,16 +74,16 @@ div {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: #cccccc;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: #999999;
 }
 
 /* Accessibility Enhancements */
@@ -150,57 +119,61 @@ div {
     margin: 0;
   }
 
-  /* Print color adjustment */
+  /* Print color adjustment - !important needed for print override */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Basic reset */
-  html {
-    background: white !important;
-    background-color: white !important;
-  }
-  
+  /* Basic reset - !important needed for print override */
+  html,
   body {
-    margin: 0;
-    padding: 0;
-    background: white !important;
     background-color: white !important;
-  }
-  
-  /* Ensure all containers have white background */
-  div, section, article, main {
-    background-color: transparent !important;
-  }
-  
-  /* Override Tailwind background utility classes */
-  [class*="bg-green"], [class*="bg-blue"], [class*="bg-gray"],
-  [class*="bg-mint"], [class*="bg-teal"], [class*="bg-emerald"],
-  .bg-green-50, .bg-green-100, .bg-green-200,
-  .bg-blue-50, .bg-blue-100, .bg-blue-200,
-  .bg-gray-50, .bg-gray-100, .bg-gray-200 {
-    background-color: white !important;
-    background: white !important;
   }
 
-  /* Shadow removal */
+  /* Ensure all containers have white background - !important needed for print override */
+  div,
+  section,
+  article,
+  main {
+    background-color: transparent !important;
+  }
+
+  /* Override Tailwind background utility classes - !important needed for print override */
+  [class*='bg-green'],
+  [class*='bg-blue'],
+  [class*='bg-gray'],
+  [class*='bg-mint'],
+  [class*='bg-teal'],
+  [class*='bg-emerald'],
+  .bg-green-50,
+  .bg-green-100,
+  .bg-green-200,
+  .bg-blue-50,
+  .bg-blue-100,
+  .bg-blue-200,
+  .bg-gray-50,
+  .bg-gray-100,
+  .bg-gray-200 {
+    background-color: white !important;
+  }
+
+  /* Shadow removal - !important needed for print override */
   * {
     box-shadow: none !important;
     text-shadow: none !important;
   }
 
-  /* Hide print elements */
+  /* Hide print elements - !important needed for print override */
   .print\:hidden {
     display: none !important;
   }
 
-  /* Ensure images are visible with white background */
+  /* Ensure images are visible with white background - !important needed for print override */
   img {
     display: inline-block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    background: white !important;
     background-color: white !important;
   }
 }

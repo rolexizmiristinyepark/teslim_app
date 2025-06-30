@@ -86,12 +86,12 @@ export const CompanyShortName = 'KÜLAHÇIOĞLU DIŞ TİCARET VE SAN. LTD. ŞTİ
 export const BrandColors = {
   [BrandTypes.ROLEX]: {
     primary: '#145c3a',
-    soft: '#f0f9f4'
+    soft: '#f0f9f4',
   },
   [BrandTypes.TUDOR]: {
     primary: '#be0300',
-    soft: '#fef2f2'
-  }
+    soft: '#fef2f2',
+  },
 };
 
 // Kategori renkleri - Aksesuar (Cufflinks) için mavi tonları
@@ -99,6 +99,6 @@ export const CategoryColors = {
   [CategoryTypes.SAAT]: {},
   [CategoryTypes.AKSESUAR]: {
     primary: '#003057',
-    soft: '#eff6ff'
-  }
+    soft: '#eff6ff',
+  },
 };

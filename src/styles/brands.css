@@ -1,57 +1,57 @@
 /* Logo arkaplan kaldırma - Hover efekti olmadan */
 /* Rolex ve Tudor logolarının beyaz arkaplanını kaldır ama orjinal kalitede bırak */
-img[src*="rolex.png"],
-img[src*="tudor.png"] {
-  background: transparent !important;
+img[src*='rolex.png'],
+img[src*='tudor.png'] {
+  background: transparent;
   /* mix-blend-mode kaldırıldı - logolar silik görünyordu */
-  /* filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) !important; */
+  /* filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)); */
 }
 
 /* Marka logosu class'ları için özel kurallar */
-img[src*="rolex.png"].brand-logo,
-img[src*="tudor.png"].brand-logo,
-img[src*="rolex.png"].brand-logo-placeholder,
-img[src*="tudor.png"].brand-logo-placeholder {
-  background: transparent !important;
+img[src*='rolex.png'].brand-logo,
+img[src*='tudor.png'].brand-logo,
+img[src*='rolex.png'].brand-logo-placeholder,
+img[src*='tudor.png'].brand-logo-placeholder {
+  background: transparent;
   /* mix-blend-mode kaldırıldı */
-  /* filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15)) !important; */
-  
+  /* filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15)); */
+
   /* Hover efektlerini kaldır */
-  opacity: 0.8 !important;
-  filter: grayscale(0%) !important;
-  transform: none !important;
+  opacity: 0.8;
+  filter: grayscale(0%);
+  transform: none;
 }
 
 /* Hover efektlerini tamamen kaldır */
-img[src*="rolex.png"].brand-logo:hover,
-img[src*="tudor.png"].brand-logo:hover,
-img[src*="rolex.png"].brand-logo-placeholder:hover,
-img[src*="tudor.png"].brand-logo-placeholder:hover {
-  opacity: 0.8 !important;
-  filter: grayscale(0%) !important;
-  transform: none !important;
+img[src*='rolex.png'].brand-logo:hover,
+img[src*='tudor.png'].brand-logo:hover,
+img[src*='rolex.png'].brand-logo-placeholder:hover,
+img[src*='tudor.png'].brand-logo-placeholder:hover {
+  opacity: 0.8;
+  filter: grayscale(0%);
+  transform: none;
 }
 
 /* Parlama animasyonunu kaldır */
-img[src*="rolex.png"].brand-logo::before,
-img[src*="tudor.png"].brand-logo::before,
-img[src*="rolex.png"].brand-logo-placeholder::before,
-img[src*="tudor.png"].brand-logo-placeholder::before {
-  display: none !important;
+img[src*='rolex.png'].brand-logo::before,
+img[src*='tudor.png'].brand-logo::before,
+img[src*='rolex.png'].brand-logo-placeholder::before,
+img[src*='tudor.png'].brand-logo-placeholder::before {
+  display: none;
 }
 
 /* Auto-shine class'ını kaldır */
-img[src*="rolex.png"].auto-shine::before,
-img[src*="tudor.png"].auto-shine::before {
-  display: none !important;
+img[src*='rolex.png'].auto-shine::before,
+img[src*='tudor.png'].auto-shine::before {
+  display: none;
 }
 
 /* Alt attribute ile de kontrol */
-img[alt*="Rolex"],
-img[alt*="Tudor"],
-img[alt="Rolex Logo"],
-img[alt="Tudor Logo"] {
-  background: transparent !important;
+img[alt*='Rolex'],
+img[alt*='Tudor'],
+img[alt='Rolex Logo'],
+img[alt='Tudor Logo'] {
+  background: transparent;
   /* mix-blend-mode kaldırıldı */
 }
 
@@ -59,73 +59,73 @@ img[alt="Tudor Logo"] {
 /* Rolex Saat - Yeşil */
 body.brand-rolex.category-saat input.input-filled:focus,
 body.brand-rolex.category-saat select.input-filled:focus {
-  box-shadow: 0 0 0 2px rgba(20, 92, 58, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(20, 92, 58, 0.2);
 }
 
 body.brand-rolex.category-saat .payment-modal input.input-filled:focus,
 body.brand-rolex.category-saat .payment-modal select.input-filled:focus {
-  box-shadow: 0 0 0 2px rgba(20, 92, 58, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(20, 92, 58, 0.2);
 }
 
 /* Rolex Aksesuar - Mavi */
 body.brand-rolex.category-aksesuar input.input-filled:focus,
 body.brand-rolex.category-aksesuar select.input-filled:focus {
-  box-shadow: 0 0 0 2px rgba(0, 48, 87, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(0, 48, 87, 0.2);
 }
 
 body.brand-rolex.category-aksesuar .payment-modal input.input-filled:focus,
 body.brand-rolex.category-aksesuar .payment-modal select.input-filled:focus {
-  box-shadow: 0 0 0 2px rgba(0, 48, 87, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(0, 48, 87, 0.2);
 }
 
 /* Tudor - Kırmızı */
 body.brand-tudor input.input-filled:focus,
 body.brand-tudor select.input-filled:focus {
-  box-shadow: 0 0 0 2px rgba(190, 3, 0, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(190, 3, 0, 0.2);
 }
 
 body.brand-tudor .payment-modal input.input-filled:focus,
 body.brand-tudor .payment-modal select.input-filled:focus {
-  box-shadow: 0 0 0 2px rgba(190, 3, 0, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(190, 3, 0, 0.2);
 }
 
 /* Brand Border Colors */
 .border-rolex {
-  border-color: var(--rolex-color) !important;
+  border-color: var(--rolex-color);
 }
 
 .border-tudor {
-  border-color: var(--tudor-color) !important;
+  border-color: var(--tudor-color);
 }
 
 .border-cufflinks {
-  border-color: var(--cufflinks-color) !important;
+  border-color: var(--cufflinks-color);
 }
 
 /* Focus Shadow Colors */
 .focus-shadow-rolex:focus {
-  box-shadow: 0 4px 8px rgba(20, 92, 58, 0.2) !important;
+  box-shadow: 0 4px 8px rgba(20, 92, 58, 0.2);
 }
 
 .focus-shadow-tudor:focus {
-  box-shadow: 0 4px 8px rgba(190, 3, 0, 0.2) !important;
+  box-shadow: 0 4px 8px rgba(190, 3, 0, 0.2);
 }
 
 .focus-shadow-cufflinks:focus {
-  box-shadow: 0 4px 8px rgba(0, 48, 87, 0.2) !important;
+  box-shadow: 0 4px 8px rgba(0, 48, 87, 0.2);
 }
 
 /* Brand Text Colors */
 .text-rolex {
-  color: var(--rolex-color) !important;
+  color: var(--rolex-color);
 }
 
 .text-tudor {
-  color: var(--tudor-color) !important;
+  color: var(--tudor-color);
 }
 
 .text-cufflinks {
-  color: var(--cufflinks-color) !important;
+  color: var(--cufflinks-color);
 }
 
 /* Brand Button States - Rolex */
@@ -265,7 +265,7 @@ body.brand-tudor .payment-modal select.input-filled:focus {
   opacity: 0.8;
   /* hover efektleri kaldırıldı */
   filter: grayscale(0%);
-  transition: none !important;
+  transition: none;
   display: block;
   margin: 0 auto;
   position: relative;
@@ -274,21 +274,21 @@ body.brand-tudor .payment-modal select.input-filled:focus {
 
 /* Brand logo parlama animasyonu - KALDIRILDI */
 .brand-logo::before {
-  display: none !important;
+  display: none;
 }
 
 .brand-logo:hover {
   opacity: 0.8;
   filter: grayscale(0%);
-  transform: none !important;
+  transform: none;
 }
 
 .brand-logo:hover::before {
-  display: none !important;
+  display: none;
 }
 
 .brand-logo.auto-shine::before {
-  display: none !important;
+  display: none;
 }
 
 /* Rolex Logo - Özel Boyut */

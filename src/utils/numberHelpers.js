@@ -39,8 +39,8 @@ export const formatNumber = (value) => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 2,
     }).format(numericValue);
-  } catch (error) {
-    console.error('Sayı formatlama hatası:', error);
+  } catch (_error) { // eslint-disable-line no-unused-vars
+    // Sayı formatlama hatası
     return '';
   }
 };
@@ -69,8 +69,8 @@ export const parseFormattedNumber = (formattedValue) => {
 
     const numericValue = parseFloat(cleanedValue);
     return isNaN(numericValue) ? '' : numericValue.toString();
-  } catch (error) {
-    console.error('Sayı parse hatası:', error);
+  } catch (_error) { // eslint-disable-line no-unused-vars
+    // Sayı parse hatası
     return '';
   }
 };

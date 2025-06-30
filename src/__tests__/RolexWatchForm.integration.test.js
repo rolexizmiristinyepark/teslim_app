@@ -10,7 +10,7 @@ import RolexWatchForm from '../RolexWatchForm';
 
 // Mock lazy loaded components
 jest.mock('../components/TutanakTemplate', () => {
-  return function MockTutanakTemplate(props) {
+  return function MockTutanakTemplate(_props) {
     return <div data-testid="tutanak-template">Tutanak Template</div>;
   };
 });
@@ -20,13 +20,23 @@ jest.mock('../components/ProductModal/PaymentDetailModal', () => {
     return (
       <div data-testid="payment-detail-modal">
         Payment Detail Modal
-        <button onClick={() => props.onPaymentsChange([{
-          id: 'test-payment',
-          type: 'HAVALE',
-          amount: '10000',
-          currency: 'TL',
-          date: '15.01.2024'
-        }], true, 'Test payment')}>
+        <button
+          onClick={() =>
+            props.onPaymentsChange(
+              [
+                {
+                  id: 'test-payment',
+                  type: 'HAVALE',
+                  amount: '10000',
+                  currency: 'TL',
+                  date: '15.01.2024',
+                },
+              ],
+              true,
+              'Test payment'
+            )
+          }
+        >
           Add Test Payment
         </button>
       </div>
@@ -35,25 +45,27 @@ jest.mock('../components/ProductModal/PaymentDetailModal', () => {
 });
 
 jest.mock('../components/ProductModal/ProductDetailModal', () => {
-  return function MockProductDetailModal(props) {
+  return function MockProductDetailModal(_props) {
     return <div data-testid="product-detail-modal">Product Detail Modal</div>;
   };
 });
 
 // Mock RMC analysis service
 jest.mock('../utils/newRmcService', () => ({
-  analyzeRmc: jest.fn(() => Promise.resolve({
-    success: true,
-    data: {
-      FAMILY: 'DATEJUST',
-      SIZE: '41',
-      DIAL: 'Blue dial',
-      BRACELET: 'Oyster bracelet',
-      DETAIL: 'Datejust 41, Oystersteel',
-      PRICE: '€10,500'
-    },
-    message: 'RMC found successfully'
-  }))
+  analyzeRmc: jest.fn(() =>
+    Promise.resolve({
+      success: true,
+      data: {
+        FAMILY: 'DATEJUST',
+        SIZE: '41',
+        DIAL: 'Blue dial',
+        BRACELET: 'Oyster bracelet',
+        DETAIL: 'Datejust 41, Oystersteel',
+        PRICE: '€10,500',
+      },
+      message: 'RMC found successfully',
+    })
+  ),
 }));
 
 describe('RolexWatchForm Integration Tests', () => {
@@ -68,9 +80,8 @@ describe('RolexWatchForm Integration Tests', () => {
     expect(screen.getByText('ROLEX')).toBeInTheDocument();
     expect(screen.getByText('TUDOR')).toBeInTheDocument();
 
-    // Check category selector
-    expect(screen.getByText('SAAT')).toBeInTheDocument();
-    expect(screen.getByText('AKSESUAR')).toBeInTheDocument();
+    // Check CUFFLINKS button (represents AKSESUAR category)
+    expect(screen.getByText('CUFFLINKS')).toBeInTheDocument();
 
     // Check form fields
     expect(screen.getByLabelText(/Müşteri Adı/)).toBeInTheDocument();
@@ -81,7 +92,7 @@ describe('RolexWatchForm Integration Tests', () => {
 
   test('should show product detail modal', () => {
     render(<RolexWatchForm />);
-    
+
     expect(screen.getByTestId('product-detail-modal')).toBeInTheDocument();
   });
 
@@ -97,12 +108,12 @@ describe('RolexWatchForm Integration Tests', () => {
     expect(customerInput.value).toBe('');
   });
 
-  test('should handle category selection', async () => {
+  test('should handle CUFFLINKS selection', async () => {
     const user = userEvent.setup();
     render(<RolexWatchForm />);
 
-    const aksesuarButton = screen.getByText('AKSESUAR');
-    await user.click(aksesuarButton);
+    const cufflinksButton = screen.getByText('CUFFLINKS');
+    await user.click(cufflinksButton);
 
     // Form should reset when category changes
     const customerInput = screen.getByLabelText(/Müşteri Adı/);
@@ -116,7 +127,7 @@ describe('RolexWatchForm Integration Tests', () => {
     const customerInput = screen.getByLabelText(/Müşteri Adı/);
     await user.type(customerInput, 'Test Customer');
 
-    expect(customerInput.value).toBe('Test Customer');
+    expect(customerInput.value).toBe('TEST CUSTOMER');
   });
 
   test('should handle RMC input and analysis', async () => {
@@ -127,10 +138,12 @@ describe('RolexWatchForm Integration Tests', () => {
     await user.type(rmcInput, '126334-0001');
 
     expect(rmcInput.value).toBe('126334-0001');
-    
+
     // Wait for RMC analysis to complete
     await waitFor(() => {
-      expect(require('../utils/newRmcService').analyzeRmc).toHaveBeenCalledWith('126334-0001');
+      expect(require('../utils/newRmcService').analyzeRmc).toHaveBeenCalledWith(
+        '126334-0001'
+      );
     });
   });
 
@@ -232,12 +245,12 @@ describe('RolexWatchForm Integration Tests', () => {
   });
 
   test('should validate required fields', async () => {
-    const user = userEvent.setup();
+    // const user = userEvent.setup();
     render(<RolexWatchForm />);
 
     // Try to submit without filling required fields
     const submitButton = screen.queryByText('Gönder');
-    
+
     // Submit button should not be visible when form is invalid
     expect(submitButton).not.toBeInTheDocument();
   });
@@ -246,7 +259,7 @@ describe('RolexWatchForm Integration Tests', () => {
     // Mock RMC analysis to return error
     require('../utils/newRmcService').analyzeRmc.mockResolvedValueOnce({
       success: false,
-      message: 'RMC not found'
+      message: 'RMC not found',
     });
 
     const user = userEvent.setup();
@@ -256,7 +269,9 @@ describe('RolexWatchForm Integration Tests', () => {
     await user.type(rmcInput, 'INVALID');
 
     await waitFor(() => {
-      expect(require('../utils/newRmcService').analyzeRmc).toHaveBeenCalledWith('INVALID');
+      expect(require('../utils/newRmcService').analyzeRmc).toHaveBeenCalledWith(
+        'INVALID'
+      );
     });
 
     // Form should handle error state appropriately

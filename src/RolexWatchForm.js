@@ -33,26 +33,27 @@ import { THEME } from './constants/theme';
 import { useFormData } from './hooks/useFormData';
 import { usePayments } from './hooks/usePayments';
 import { useRmcAnalysis } from './hooks/useRmcAnalysis';
-import { useTheme } from './hooks/useTheme';
+// import { useTheme } from './hooks/useTheme';
 import { getCurrentDate } from './utils/dateHelpers';
 import { validateForm } from './utils/formValidation';
 import { generatePaymentDetailsText } from './utils/paymentHelpers';
 import { generateId } from './utils/stringHelpers';
 
+// Form için başlangıç değerleri - static object, component dışında tanımlanır
+const initialFormData = {
+  musteri: '',
+  rmc: '',
+  seri: '',
+  size: '',
+  aile: '',
+  description: '',
+  teslimEdilenKisi: '',
+  kadran: '',
+  bilezik: '',
+  fiyat: ''
+};
+
 const RolexWatchForm = () => {
-  // Form için başlangıç değerleri - memoized to prevent re-renders
-  const initialFormData = useMemo(() => ({
-    musteri: '',
-    rmc: '',
-    seri: '',
-    size: '',
-    aile: '',
-    description: '',
-    teslimEdilenKisi: '',
-    kadran: '',
-    bilezik: '',
-    fiyat: ''
-  }), []);
 
   // Ana state'ler - Minimal state management
   const [currentDate] = useState(() => getCurrentDate());
@@ -71,7 +72,7 @@ const RolexWatchForm = () => {
   const [currentTotalText, setCurrentTotalText] = useState('');
 
   // Custom hooks
-  const { inputClass } = useTheme(selectedBrand, selectedCategory);
+  // const { brandColor, activeBorderColor } = useTheme(selectedBrand, selectedCategory);
 
   const {
     formData,
@@ -201,7 +202,18 @@ const RolexWatchForm = () => {
     window.print();
   }, []);
 
-  // Effects - Payment details generation  
+  // Set mint green background on body via CSS
+  useEffect(() => {
+    document.body.style.minHeight = '100vh';
+    // Background color now handled by CSS (mint green 50)
+    
+    return () => {
+      // Cleanup when component unmounts
+      document.body.style.minHeight = '';
+    };
+  }, []);
+
+  // Effects - Payment details generation
   useEffect(() => {
     if (payments.length > 0) {
       const details = generatePaymentDetailsText(payments, formData, selectedBrand, selectedCategory);
@@ -234,21 +246,21 @@ const RolexWatchForm = () => {
             <div className="fixed right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 print:hidden">
               <button
                 onClick={handleEdit}
-                className="p-2 hover:opacity-70 focus:outline-none transition-opacity duration-200"
+                className="tutanak-action-btn p-2 hover:opacity-70 focus:outline-none transition-opacity duration-200"
                 title="Düzenle"
               >
                 <Edit size={24} strokeWidth={1.5} style={THEME.icons.edit} />
               </button>
               <button
                 onClick={handlePrint}
-                className="p-2 hover:opacity-70 focus:outline-none transition-opacity duration-200"
+                className="tutanak-action-btn p-2 hover:opacity-70 focus:outline-none transition-opacity duration-200"
                 title="Yazdır"
               >
                 <Printer size={24} strokeWidth={1.5} style={THEME.icons.print} />
               </button>
               <button
                 onClick={handleNewForm}
-                className="p-2 hover:opacity-70 focus:outline-none transition-opacity duration-200"
+                className="tutanak-action-btn p-2 hover:opacity-70 focus:outline-none transition-opacity duration-200"
                 title="Yeni Tutanak"
               >
                 <Trash2 size={24} strokeWidth={1.5} stroke={THEME.icons.delete.stroke} />
@@ -280,10 +292,7 @@ const RolexWatchForm = () => {
             <CustomerForm
               formData={formData}
               validationErrors={validationErrors}
-              inputClass={inputClass}
               onChange={handleChange}
-              selectedBrand={selectedBrand}
-              selectedCategory={selectedCategory}
             />
 
             {/* RMC VE ÜRÜN BİLGİLERİ */}
@@ -292,7 +301,6 @@ const RolexWatchForm = () => {
               selectedBrand={selectedBrand}
               selectedCategory={selectedCategory}
               validationErrors={validationErrors}
-              inputClass={inputClass}
               rmcAnalysisResult={rmcAnalysisResult}
               rmcMessage={rmcMessage}
               isProductChecked={isProductChecked}

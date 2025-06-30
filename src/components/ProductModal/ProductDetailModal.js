@@ -4,6 +4,7 @@
  */
 
 import { BrandTypes, CategoryTypes } from '../../constants/types';
+import { getProductImageClass } from '../../utils/brandHelpers';
 
 const ProductDetailModal = ({
   formData,
@@ -55,12 +56,7 @@ const ProductDetailModal = ({
             <img
               src={getProductImageUrl()}
               alt="Product Image"
-              className={`product-image auto-shine ${
-                selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.SAAT ? 'rolex-watch-image' :
-                selectedBrand === BrandTypes.TUDOR ? 'tudor-watch-image' :
-                selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.AKSESUAR ? 'cufflinks-image' :
-                'default-product-image'
-              }`}
+              className={`product-image auto-shine ${getProductImageClass(selectedBrand, selectedCategory)}`}
               onError={(e) => {
                 // Görsel yüklenemezse varsayılan logo göster
                 e.target.style.display = 'none';

@@ -1,10 +1,6 @@
 import { useMemo, useEffect } from 'react';
 
-import {
-  THEME,
-  getBrandColor,
-  getInputThemeClass,
-} from '../constants/theme';
+import { THEME, getBrandColor } from '../constants/theme';
 import { BrandTypes, CategoryTypes } from '../constants/types';
 
 /**
@@ -13,9 +9,6 @@ import { BrandTypes, CategoryTypes } from '../constants/types';
  */
 export const useTheme = (selectedBrand, selectedCategory) => {
   const themeData = useMemo(() => {
-    // Input class belirleme
-    const inputClass = getInputThemeClass(selectedBrand, selectedCategory);
-
     // Brand color belirleme
     const brandColor = getBrandColor(selectedBrand, selectedCategory);
 
@@ -23,7 +16,6 @@ export const useTheme = (selectedBrand, selectedCategory) => {
     const activeBorderColor = THEME.colors.rolex.blue; // tüm input'lar için aynı renk
 
     return {
-      inputClass,
       brandColor,
       activeBorderColor,
     };
@@ -35,12 +27,17 @@ export const useTheme = (selectedBrand, selectedCategory) => {
     const body = document.body;
 
     // CSS variable güncelle
-    root.style.setProperty('--active-border-color', themeData.activeBorderColor);
+    root.style.setProperty(
+      '--active-border-color',
+      themeData.activeBorderColor
+    );
 
     // Body'den önceki class'ları temizle
     body.classList.remove(
-      'brand-rolex', 'brand-tudor',
-      'category-saat', 'category-aksesuar'
+      'brand-rolex',
+      'brand-tudor',
+      'category-saat',
+      'category-aksesuar'
     );
 
     // Yeni class'ları ekle

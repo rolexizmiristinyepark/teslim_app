@@ -10,7 +10,7 @@ import {
   generateLinkPaymentText,
   generateNakitPaymentText,
   generatePaymentDetailsText,
-  calculateTotalAmounts
+  calculateTotalAmounts,
 } from '../utils/paymentHelpers';
 import { BrandTypes, CategoryTypes, PaymentTypes } from '../constants/types';
 import { createMockFormData, createMockPayment } from '../setupTests';
@@ -18,16 +18,25 @@ import { createMockFormData, createMockPayment } from '../setupTests';
 describe('paymentHelpers', () => {
   describe('generateCariPaymentText', () => {
     test('should generate correct text for Rolex watch', () => {
-      const payment = createMockPayment({ type: PaymentTypes.CARI, amount: '50000', currency: 'TL' });
+      const payment = createMockPayment({
+        type: PaymentTypes.CARI,
+        amount: '50000',
+        currency: 'TL',
+      });
       const formData = createMockFormData({
         musteri: 'Ahmet Yılmaz',
         rmc: '126334-0001',
         seri: 'A1234567',
         size: '41',
-        aile: 'Datejust'
+        aile: 'Datejust',
       });
 
-      const result = generateCariPaymentText(payment, formData, BrandTypes.ROLEX, CategoryTypes.SAAT);
+      const result = generateCariPaymentText(
+        payment,
+        formData,
+        BrandTypes.ROLEX,
+        CategoryTypes.SAAT
+      );
 
       expect(result).toContain('Rolex marka');
       expect(result).toContain('126334-0001');
@@ -35,60 +44,83 @@ describe('paymentHelpers', () => {
       expect(result).toContain('41 çapında');
       expect(result).toContain('Datejust ailesine ait');
       expect(result).toContain('saatnin satışı');
-      expect(result).toContain('Ahmet Yılmaz\'a');
+      expect(result).toContain("Ahmet Yılmaz'a");
       expect(result).toContain('50.000 ₺');
     });
 
     test('should generate correct text for Tudor watch', () => {
-      const payment = createMockPayment({ type: PaymentTypes.CARI, amount: '30000', currency: 'EUR' });
+      const payment = createMockPayment({
+        type: PaymentTypes.CARI,
+        amount: '30000',
+        currency: 'EUR',
+      });
       const formData = createMockFormData({
         musteri: 'Ayşe Demir',
-        rmc: 'M79230B-0001'
+        rmc: 'M79230B-0001',
       });
 
-      const result = generateCariPaymentText(payment, formData, BrandTypes.TUDOR, CategoryTypes.SAAT);
+      const result = generateCariPaymentText(
+        payment,
+        formData,
+        BrandTypes.TUDOR,
+        CategoryTypes.SAAT
+      );
 
       expect(result).toContain('Tudor marka');
       expect(result).toContain('M79230B-0001');
       expect(result).toContain('saatnin satışı');
-      expect(result).toContain('Ayşe Demir\'ye');
+      expect(result).toContain("Ayşe Demir'ye");
       expect(result).toContain('30.000 €');
     });
 
     test('should generate correct text for Rolex cufflinks (accessories)', () => {
-      const payment = createMockPayment({ type: PaymentTypes.CARI, amount: '5000', currency: 'TL' });
+      const payment = createMockPayment({
+        type: PaymentTypes.CARI,
+        amount: '5000',
+        currency: 'TL',
+      });
       const formData = createMockFormData({
         musteri: 'Mehmet Kaya',
         rmc: 'A1018',
         description: 'A1018 CUFFLINKS CROWN',
-        seri: '' // no serial for cufflinks
+        seri: '', // no serial for cufflinks
       });
 
-      const result = generateCariPaymentText(payment, formData, BrandTypes.ROLEX, CategoryTypes.AKSESUAR);
+      const result = generateCariPaymentText(
+        payment,
+        formData,
+        BrandTypes.ROLEX,
+        CategoryTypes.AKSESUAR
+      );
 
       expect(result).toContain('Rolex marka');
       expect(result).toContain('Cufflinks Crown');
       expect(result).toContain('kol düğmesinin satışı');
-      expect(result).toContain('Mehmet Kaya\'ya');
+      expect(result).toContain("Mehmet Kaya'ya");
       expect(result).toContain('5.000 ₺');
       expect(result).not.toContain('seri numaralı'); // no serial for cufflinks
     });
 
     test('should handle Turkish vowel harmony correctly', () => {
       const payment = createMockPayment({ type: PaymentTypes.CARI });
-      
+
       const testCases = [
-        { name: 'Ahmet', expected: 'Ahmet\'ye' },
-        { name: 'Ali', expected: 'Ali\'ye' },
-        { name: 'Fatma', expected: 'Fatma\'ya' },
-        { name: 'Ayşe', expected: 'Ayşe\'ye' },
-        { name: 'Serdar', expected: 'Serdar\'a' },
-        { name: 'Özgür', expected: 'Özgür\'e' },
+        { name: 'Ahmet', expected: "Ahmet'ye" },
+        { name: 'Ali', expected: "Ali'ye" },
+        { name: 'Fatma', expected: "Fatma'ya" },
+        { name: 'Ayşe', expected: "Ayşe'ye" },
+        { name: 'Serdar', expected: "Serdar'a" },
+        { name: 'Özgür', expected: "Özgür'e" },
       ];
 
       testCases.forEach(({ name, expected }) => {
         const formData = createMockFormData({ musteri: name });
-        const result = generateCariPaymentText(payment, formData, BrandTypes.ROLEX, CategoryTypes.SAAT);
+        const result = generateCariPaymentText(
+          payment,
+          formData,
+          BrandTypes.ROLEX,
+          CategoryTypes.SAAT
+        );
         expect(result).toContain(expected);
       });
     });
@@ -100,7 +132,7 @@ describe('paymentHelpers', () => {
         type: PaymentTypes.HAVALE,
         date: '15.01.2024',
         amount: '25000',
-        currency: 'TL'
+        currency: 'TL',
       });
 
       const result = generateHavalePaymentText(payment);
@@ -115,7 +147,7 @@ describe('paymentHelpers', () => {
       const payment = createMockPayment({
         type: PaymentTypes.HAVALE,
         amount: '1000',
-        currency: 'EUR'
+        currency: 'EUR',
       });
 
       const result = generateHavalePaymentText(payment);
@@ -129,7 +161,7 @@ describe('paymentHelpers', () => {
         type: PaymentTypes.KREDI_KARTI,
         date: '15.01.2024',
         amount: '15000',
-        currency: 'TL'
+        currency: 'TL',
       });
 
       const result = generateKrediKartiPaymentText(payment);
@@ -147,7 +179,7 @@ describe('paymentHelpers', () => {
         type: PaymentTypes.LINK,
         date: '15.01.2024',
         amount: '20000',
-        currency: 'TL'
+        currency: 'TL',
       });
 
       const result = generateLinkPaymentText(payment);
@@ -165,7 +197,7 @@ describe('paymentHelpers', () => {
         type: PaymentTypes.NAKIT,
         date: '15.01.2024',
         amount: '5000',
-        currency: 'TL'
+        currency: 'TL',
       });
 
       const result = generateNakitPaymentText(payment);
@@ -182,25 +214,35 @@ describe('paymentHelpers', () => {
       const payments = [
         createMockPayment({ type: PaymentTypes.HAVALE, amount: '10000' }),
         createMockPayment({ type: PaymentTypes.NAKIT, amount: '5000' }),
-        createMockPayment({ type: PaymentTypes.CARI, amount: '15000' })
+        createMockPayment({ type: PaymentTypes.CARI, amount: '15000' }),
       ];
       const formData = createMockFormData();
 
-      const result = generatePaymentDetailsText(payments, formData, BrandTypes.ROLEX, CategoryTypes.SAAT);
+      const result = generatePaymentDetailsText(
+        payments,
+        formData,
+        BrandTypes.ROLEX,
+        CategoryTypes.SAAT
+      );
 
       expect(result).toContain('*'); // first payment
-      expect(result).toContain('**'); // second payment  
+      expect(result).toContain('**'); // second payment
       expect(result).toContain('***'); // third payment
       expect(result.split('\n\n')).toHaveLength(3); // three separate payments
     });
 
     test('should handle cari payment without prefix', () => {
       const payments = [
-        createMockPayment({ type: PaymentTypes.CARI, amount: '50000' })
+        createMockPayment({ type: PaymentTypes.CARI, amount: '50000' }),
       ];
       const formData = createMockFormData({ musteri: 'Test Customer' });
 
-      const result = generatePaymentDetailsText(payments, formData, BrandTypes.ROLEX, CategoryTypes.SAAT);
+      const result = generatePaymentDetailsText(
+        payments,
+        formData,
+        BrandTypes.ROLEX,
+        CategoryTypes.SAAT
+      );
 
       expect(result).toContain('* ');
       expect(result).toContain('Test Customer');
@@ -218,7 +260,7 @@ describe('paymentHelpers', () => {
       const payments = [
         createMockPayment({ amount: '10000', currency: 'TL' }),
         createMockPayment({ amount: '5000', currency: 'TL' }),
-        createMockPayment({ amount: '2500', currency: 'TL' })
+        createMockPayment({ amount: '2500', currency: 'TL' }),
       ];
 
       const result = calculateTotalAmounts(payments);
@@ -231,7 +273,7 @@ describe('paymentHelpers', () => {
       const payments = [
         createMockPayment({ amount: '10000', currency: 'TL' }),
         createMockPayment({ amount: '1000', currency: 'EUR' }),
-        createMockPayment({ amount: '500', currency: 'USD' })
+        createMockPayment({ amount: '500', currency: 'USD' }),
       ];
 
       const result = calculateTotalAmounts(payments);
@@ -247,7 +289,7 @@ describe('paymentHelpers', () => {
     test('should handle formatted numbers correctly', () => {
       const payments = [
         createMockPayment({ amount: '10.000', currency: 'TL' }),
-        createMockPayment({ amount: '5,500', currency: 'TL' })
+        createMockPayment({ amount: '5.500', currency: 'TL' }),
       ];
 
       const result = calculateTotalAmounts(payments);
@@ -258,7 +300,7 @@ describe('paymentHelpers', () => {
     test('should filter out zero amounts', () => {
       const payments = [
         createMockPayment({ amount: '10000', currency: 'TL' }),
-        createMockPayment({ amount: '0', currency: 'EUR' })
+        createMockPayment({ amount: '0', currency: 'EUR' }),
       ];
 
       const result = calculateTotalAmounts(payments);

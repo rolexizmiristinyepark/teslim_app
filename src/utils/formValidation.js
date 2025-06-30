@@ -14,7 +14,10 @@ import { BrandTypes, CategoryTypes } from '../constants/types';
  */
 export const validateSerial = (serial, selectedBrand, selectedCategory) => {
   // Cufflinks (AKSESUAR) için seri numarası zorunlu değil
-  if (selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.AKSESUAR) {
+  if (
+    selectedBrand === BrandTypes.ROLEX &&
+    selectedCategory === CategoryTypes.AKSESUAR
+  ) {
     return true;
   }
 
@@ -68,11 +71,16 @@ export const validateForm = (
   const requiredFieldsWithSerial = [...requiredFields];
 
   // Cufflinks (AKSESUAR) değilse seri numarası da zorunlu
-  if (!(selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.AKSESUAR)) {
+  if (
+    !(
+      selectedBrand === BrandTypes.ROLEX &&
+      selectedCategory === CategoryTypes.AKSESUAR
+    )
+  ) {
     requiredFieldsWithSerial.push('seri');
   }
 
-  const hasAllRequiredFields = requiredFieldsWithSerial.every(field => {
+  const hasAllRequiredFields = requiredFieldsWithSerial.every((field) => {
     return formData[field] && formData[field].trim().length > 0;
   });
 
@@ -81,16 +89,19 @@ export const validateForm = (
   }
 
   // RMC geçerlilik kontrolü
-  const isRmcValid = formData.rmc &&
-                     rmcAnalysisResult &&
-                     rmcMessage.type !== 'error';
+  const isRmcValid =
+    formData.rmc && rmcAnalysisResult && rmcMessage.type !== 'error';
 
   if (!isRmcValid) {
     return false;
   }
 
   // Seri numarası validasyonu
-  const isSerialValid = validateSerial(formData.seri, selectedBrand, selectedCategory);
+  const isSerialValid = validateSerial(
+    formData.seri,
+    selectedBrand,
+    selectedCategory
+  );
   if (!isSerialValid) {
     return false;
   }
@@ -111,7 +122,10 @@ export const validateForm = (
  */
 export const getSerialMinLength = (selectedBrand, selectedCategory) => {
   // Cufflinks (AKSESUAR) için seri numarası gerekli değil
-  if (selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.AKSESUAR) {
+  if (
+    selectedBrand === BrandTypes.ROLEX &&
+    selectedCategory === CategoryTypes.AKSESUAR
+  ) {
     return 0;
   }
 
@@ -134,7 +148,10 @@ export const getSerialMinLength = (selectedBrand, selectedCategory) => {
  */
 export const getSerialDescription = (selectedBrand, selectedCategory) => {
   // Cufflinks (AKSESUAR) için seri numarası açıklaması gerekli değil
-  if (selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.AKSESUAR) {
+  if (
+    selectedBrand === BrandTypes.ROLEX &&
+    selectedCategory === CategoryTypes.AKSESUAR
+  ) {
     return 'Cufflinks için seri numarası gerekmez';
   }
 

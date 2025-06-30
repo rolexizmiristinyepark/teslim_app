@@ -35,10 +35,25 @@ module.exports = {
         },
         // Brand colors for animated buttons
         'rolex-green': '#145c3a',
+        'rolex-blue': '#003057',
         'tudor-red': '#be0300',
         'gold': '#ffc506',
         // Main text color override
         'text-main': '#243C4C',
+        // App specific colors
+        'mint': {
+          50: '#F4FCFB',
+          100: '#e6f7ff',
+          200: '#b3e5ff',
+          300: '#80d4ff',
+          400: '#4dc3ff',
+          500: '#1ab2ff',
+          600: '#0099e6',
+          700: '#0080cc',
+          800: '#0066b3',
+          900: '#004d99',
+        },
+        'border-gray': '#ACBCBF',
       },
       // Override default text colors to use our main color
       textColor: {

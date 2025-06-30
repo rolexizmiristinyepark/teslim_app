@@ -29,20 +29,6 @@ export const useRmcAnalysis = (
   const [isLoadingRmc, setIsLoadingRmc] = useState(false);
 
   /**
-   * Loading durumunu manuel olarak başlat
-   */
-  const startRmcLoading = useCallback(() => {
-    setIsLoadingRmc(true);
-  }, []);
-
-  /**
-   * Loading durumunu manuel olarak durdur
-   */
-  const stopRmcLoading = useCallback(() => {
-    setIsLoadingRmc(false);
-  }, []);
-
-  /**
    * RMC analiz fonksiyonu - Sadece tam eşleşme
    * Girilen RMC kodunu CSV'den tam eşleşme ile kontrol eder
    * Marka/kategori uyumluluğunu kontrol eder
@@ -73,8 +59,7 @@ export const useRmcAnalysis = (
         const data = await findExactRmcMatch(rmcInput);
 
         if (data) {
-          // eslint-disable-next-line no-console
-          console.log('RMC tam eşleşme bulundu:', data);
+          // RMC tam eşleşme bulundu
 
           // Marka kontrolü
           const expectedBrand = BRAND_MAPPING[selectedBrand];
@@ -144,8 +129,7 @@ export const useRmcAnalysis = (
           }
 
           // Başarılı eşleşme
-          // eslint-disable-next-line no-console
-          console.log('✅ RMC başarılı eşleşme:', data);
+          // RMC başarılı eşleşme
           setRmcMessage({ text: '', type: '' });
           setRmcAnalysisResult(data);
 
@@ -161,8 +145,7 @@ export const useRmcAnalysis = (
           };
         } else {
           // RMC bulunamadı
-          // eslint-disable-next-line no-console
-          console.log('RMC bulunamadı:', rmcInput);
+          // RMC bulunamadı
           setRmcMessage({
             text: 'RMC kodu bulunamadı. Lütfen doğru kodu girdiğinizden emin olun.',
             type: 'error',
@@ -179,8 +162,8 @@ export const useRmcAnalysis = (
             description: '',
           };
         }
-      } catch (error) {
-        console.error('RMC analiz hatası:', error);
+      } catch (_error) { // eslint-disable-line no-unused-vars
+        // RMC analiz hatası
         setRmcMessage({
           text: 'RMC analizi sırasında bir hata oluştu.',
           type: 'error',
@@ -206,7 +189,5 @@ export const useRmcAnalysis = (
   return {
     isLoadingRmc,
     analyzeRmc,
-    startRmcLoading,
-    stopRmcLoading,
   };
 };

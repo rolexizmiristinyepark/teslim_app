@@ -24,13 +24,14 @@ Object.keys(mockEnvVars).forEach(key => {
 });
 
 // Console error/warning'leri test sırasında sessizleştir
+/* eslint-disable no-console */
 const originalError = console.error;
 const originalWarn = console.warn;
 
 beforeAll(() => {
   console.error = (...args) => {
     if (
-      typeof args[0] === 'string' && 
+      typeof args[0] === 'string' &&
       (args[0].includes('Warning:') || args[0].includes('React does not recognize'))
     ) {
       return;
@@ -40,7 +41,7 @@ beforeAll(() => {
 
   console.warn = (...args) => {
     if (
-      typeof args[0] === 'string' && 
+      typeof args[0] === 'string' &&
       args[0].includes('Environment variable')
     ) {
       return;
@@ -53,6 +54,7 @@ afterAll(() => {
   console.error = originalError;
   console.warn = originalWarn;
 });
+/* eslint-enable no-console */
 
 // ResizeObserver mock - JSDOM'da eksik
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
