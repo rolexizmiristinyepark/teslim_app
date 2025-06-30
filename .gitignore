@@ -71,7 +71,7 @@ dist
 
 # Gatsby files
 .cache/
-public
+# public klasörü artık ignore edilmiyor - index.html gerekli
 
 # Storybook build outputs
 .out
