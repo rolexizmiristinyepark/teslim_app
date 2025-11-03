@@ -33,7 +33,9 @@
     "setup:dev": "npm install --save-dev eslint @eslint/js eslint-plugin-react eslint-plugin-react-hooks prettier",
     "test:all": "npm run test:ci && npm run lint && npm run build",
     "optimize:images": "node scripts/optimize-images.js",
-    "prebuild": "npm run optimize:images"
+    "prebuild": "npm run optimize:images",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
@@ -59,6 +61,7 @@
     "eslint": "^9.28.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "gh-pages": "^6.3.0",
     "imagemin": "^9.0.1",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^10.0.0",
@@ -82,7 +85,7 @@
   ],
   "author": "Serdar Benli",
   "license": "MIT",
-  "homepage": "./",
+  "homepage": "https://rolexizmiristinyepark.github.io/teslim_app",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
