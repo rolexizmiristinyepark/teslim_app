@@ -7,6 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import ErrorBoundary from './components/ErrorBoundary';
+import AuthGuard from './components/AuthGuard';
 import RolexWatchForm from './RolexWatchForm';
 import './index.css';
 
@@ -15,7 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <RolexWatchForm />
+      <AuthGuard>
+        <RolexWatchForm />
+      </AuthGuard>
     </ErrorBoundary>
   </React.StrictMode>
 );
