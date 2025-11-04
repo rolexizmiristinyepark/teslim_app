@@ -10,9 +10,9 @@ const DocumentHeader = ({ currentDate }) => {
     <>
       {/* Logo Section */}
       <div className="logo-container flex justify-between items-center mb-2.5 py-1.5">
-        <img src="/images/rolex.png" alt="Rolex" className="h-11 w-auto" />
-        <img src="/images/kulahcioglu.png" alt="Külahçıoğlu" className="h-11 w-auto" />
-        <img src="/images/tudor.png" alt="Tudor" className="h-11 w-auto" />
+        <img src={`${process.env.PUBLIC_URL}/images/rolex.png`} alt="Rolex" className="h-11 w-auto" />
+        <img src={`${process.env.PUBLIC_URL}/images/kulahcioglu.png`} alt="Külahçıoğlu" className="h-11 w-auto" />
+        <img src={`${process.env.PUBLIC_URL}/images/tudor.png`} alt="Tudor" className="h-11 w-auto" />
       </div>
 
       <br />

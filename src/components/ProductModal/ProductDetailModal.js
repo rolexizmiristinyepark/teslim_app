@@ -31,7 +31,7 @@ const ProductDetailModal = ({
       return `https://media.tudorwatch.com/image/upload/q_auto/f_auto/t_tdr-cover-watch-zoom/c_limit,w_3840/v1/catalogue/2025/upright-cb-with-drop-shadow/tudor-m${rmcLower}`;
     }
     if (selectedBrand === BrandTypes.ROLEX && selectedCategory === CategoryTypes.AKSESUAR) {
-      return `/images_cufflinks/${rmcUpper}.png`;
+      return `${process.env.PUBLIC_URL}/images_cufflinks/${rmcUpper}.png`;
     }
     return null;
   };
@@ -43,7 +43,7 @@ const ProductDetailModal = ({
         {isLoadingRmc || !formData.rmc || !rmcAnalysisResult || rmcMessage.type === 'error' ? (
           <div className="brand-placeholder">
             <img
-              src={`/images/${selectedBrand.toLowerCase()}.png`}
+              src={`${process.env.PUBLIC_URL}/images/${selectedBrand.toLowerCase()}.png`}
               alt={`${selectedBrand} Logo`}
               className="brand-logo-placeholder auto-shine"
               onError={(e) => {
@@ -71,7 +71,7 @@ const ProductDetailModal = ({
             {/* Görsel yüklenemediğinde gösterilecek fallback */}
             <div className="brand-placeholder-fallback" style={{display: 'none'}}>
               <img
-                src={`/images/${selectedBrand.toLowerCase()}.png`}
+                src={`${process.env.PUBLIC_URL}/images/${selectedBrand.toLowerCase()}.png`}
                 alt={`${selectedBrand} Logo`}
                 className="brand-logo-placeholder auto-shine"
               />
@@ -80,7 +80,7 @@ const ProductDetailModal = ({
             {/* Marka Simgesi - RMC girilince görünür */}
             <div className="brand-logo-container brand-logo-slide-down">
               <img
-                src={`/images/${selectedBrand.toLowerCase()}.png`}
+                src={`${process.env.PUBLIC_URL}/images/${selectedBrand.toLowerCase()}.png`}
                 alt={`${selectedBrand} Logo`}
                 className="brand-logo auto-shine"
                 onError={(e) => {
