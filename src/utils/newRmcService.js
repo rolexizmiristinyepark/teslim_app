@@ -12,7 +12,7 @@ const parseCache = new Map(); // Parse sonuçları için cache
 
 // Configuration
 const CONFIG = {
-  CSV_PATH: process.env.REACT_APP_RMC_CSV_PATH || '/data/RMC.csv',
+  CSV_PATH: process.env.REACT_APP_RMC_CSV_PATH || `${process.env.PUBLIC_URL}/data/RMC.csv`,
   IS_DEV: process.env.NODE_ENV === 'development',
   MAX_CACHE_SIZE: 100, // Parse cache boyut limiti
 };
@@ -195,7 +195,7 @@ export const loadRmcData = async (forceRefresh = false) => {
 
     // Fetch optimizasyonu: cache busting sadece development'ta
     const timestamp = CONFIG.IS_DEV ? new Date().getTime() : '';
-    const url = timestamp ? `/data/RMC.csv?v=${timestamp}` : '/data/RMC.csv';
+    const url = timestamp ? `${CONFIG.CSV_PATH}?v=${timestamp}` : CONFIG.CSV_PATH;
 
     const response = await fetch(url, {
       cache: CONFIG.IS_DEV ? 'no-cache' : 'default', // Production'da cache kullan
